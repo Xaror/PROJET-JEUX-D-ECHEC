@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package JeuxEchecs;
+package jeuxechecs;
 
 /**
  *
  * @authors Benayed, De preiter-Baise, Lottiaux
  */
-public class Piece{
+public abstract class Piece{
     private String nom;
     private String couleur;
 
@@ -33,5 +33,6 @@ public class Piece{
     public String getCouleur(){
 	return couleur;
     }
-   
+    
+    public abstract boolean deplacementValide(Deplacement deplacement);
 }
