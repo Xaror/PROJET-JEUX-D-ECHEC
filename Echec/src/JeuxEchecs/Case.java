@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jeuxechecs;
+package JeuxEchecs;
 
 /**
  *
@@ -29,11 +29,11 @@ public class Case{
     }
 		
     public boolean caseOccupee(String couleur){
-	if (piece == null){
+	if(piece == null){
             return false;
         }
         else{
-            return (piece.getCouleur().equals(couleur));
+            return(piece.getCouleur().equals(couleur));
         }
     }  
     

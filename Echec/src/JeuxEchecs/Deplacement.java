@@ -4,7 +4,7 @@
  * and open the template in the editor.
     * qdsfhqdt
  */
-package jeuxechecs;
+package JeuxEchecs;
 
 /**
  *
