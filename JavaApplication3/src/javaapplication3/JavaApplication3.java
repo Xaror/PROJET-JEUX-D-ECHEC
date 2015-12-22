@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package echec;
+package javaapplication3;
 
 /**
  *
- * @authors Benayed, De preiter-Baise, Lottiaux
+ * @author Bloody
  */
-public class JeuxEchecs {
+public class JavaApplication3 {
 
     /**
      * @param args the command line arguments
