@@ -64,8 +64,8 @@ public class Echiquier{
         }
     }
 
-    public Case getCase(int ligne, int colonne){
-	return location[colonne][ligne];
+    public Case getCase(int colonne, int ligne){
+        return location[colonne][ligne];
     }
 
     public void debuter(){

@@ -13,7 +13,7 @@ public class Position{
     private int ligne; 
     private int colonne; 
 
-    public Position(int ligne, int colonne){
+    public Position(int colonne, int ligne){
 	this.ligne = ligne;
 	this.colonne = colonne;
     }
@@ -35,6 +35,6 @@ public class Position{
     }
 
     public boolean equals(Position position){
-        return position.getLigne() == this.getLigne() && position.getColonne() == this.getColonne();
-    }    
+	return position.getColonne() == this.getColonne() && position.getLigne() == this.getLigne();
+    }   
 }
