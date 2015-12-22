@@ -11,4 +11,7 @@ package JeuxEchecs;
  */
 public class Test {
     
+    public Test(){
+       System.out.print( "Toto est a la plage");
+    }
 }
