@@ -12,6 +12,7 @@ package JeuxEchecs;
 public class Test {
     
     public Test(){
-       System.out.print( "Toto est a la plage");
+       System.out.print( "Toto est a la plage a poil");
+       System.out.print( "Bryan is in the kitchen");
     }
 }
