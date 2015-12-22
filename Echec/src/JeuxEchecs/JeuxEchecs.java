@@ -17,7 +17,7 @@ public class JeuxEchecs {
     public static void main(String[] args) {
         
         // TODO code application logic here
-       // uygifufuitf
+       // Est ce que ca marche ?
     }
     
 }
