@@ -20,7 +20,7 @@ import java.awt.Color;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 /**
  *
- * @authors Benayed, De preiter-Baise, Lottiaux2
+ * @authors Benayed, De preiter-Baise, Lottiaux
  */
 public class JeuxEchecs extends JFrame{
     private Echiquier e; // echiquier
