@@ -64,9 +64,9 @@ public class JeuxEchecs extends JFrame{
         panelControle.add(boutonDebuter, null);
         this.getContentPane().add(panelControle, null);
         boutonDebuter.setBounds(new Rectangle(15, 10, 130, 25));
-        boutonDebuter.setText("DEBUTER");
+        boutonDebuter.setText("Nouveau");
         champTexte.setBounds(new Rectangle(160, 10, 215, 25));
-        boutonReset.setText("RESET");
+        boutonReset.setText("Abandonner");
         boutonReset.setBounds(new Rectangle(390, 10, 130, 25));
         GestionnaireEvenement gest = new GestionnaireEvenement();
         boutonDebuter.addMouseListener(gest);
