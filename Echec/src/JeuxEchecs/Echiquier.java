@@ -7,7 +7,7 @@ package JeuxEchecs;
 
 /**
  *
- * @authors Benayed, De preiter-Baise, Lottiaux
+ * @authors Benayed2, De preiter-Baise, Lottiaux
  */
 public class Echiquier{
     private Case[][] location;
