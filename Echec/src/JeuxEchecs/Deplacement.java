@@ -9,6 +9,7 @@ package JeuxEchecs;
 /**
  *
  * @authors Benayed, De preiter-Baise, Lottiaux
+ * Wesh
  */
 public class Deplacement{
     private double deplacementX;
