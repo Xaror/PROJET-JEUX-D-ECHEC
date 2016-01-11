@@ -31,6 +31,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="714.0" layoutY="84.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="147.0" text="Lancer une partie" />
+      <Button fx:id="StartGame" layoutX="777.0" layoutY="127.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="119.0" text="Lancer une partie" />
+      <Button fx:id="Abandon" layoutX="999.0" layoutY="127.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="113.0" text="Abandonner" />
    </children>
 </AnchorPane>

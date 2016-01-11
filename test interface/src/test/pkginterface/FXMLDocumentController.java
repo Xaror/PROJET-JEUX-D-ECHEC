@@ -24,6 +24,10 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button closeButton;
     @FXML
+    private Button StartGame;
+    @FXML
+    private Button Abandon;
+    @FXML
     private Label tmpW;
     @FXML
     private Label tmpB;
