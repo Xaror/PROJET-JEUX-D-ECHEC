@@ -10,7 +10,10 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 
 /**
  *
@@ -19,13 +22,21 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
-    
+    private Button closeButton;
+    @FXML
+    private Label tmpW;
+    @FXML
+    private Label tmpB;
+    @FXML
+    private TextArea listCpW;
+     @FXML
+    private TextArea listCpB;
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        
-        label.setText("Hello World!");
-        close();
+       Stage stage = (Stage) closeButton.getScene().getWindow();
+       
+                  
+        stage.close();
     }
     
     @Override
