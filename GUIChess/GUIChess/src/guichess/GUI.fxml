@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="753.0" style="-fx-background-image: @img/chessback.jpg;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guichess.GUIController">
+   <children>
+      <ImageView fitHeight="449.0" fitWidth="765.0" layoutX="-1.0" pickOnBounds="true" AnchorPane.bottomAnchor="-9.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-11.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@img/chessback.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgChessboard" fitHeight="419.0" fitWidth="520.0" layoutX="16.0" layoutY="7.0" onMouseClicked="#chessboardClick" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/chessboard.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="listTA" editable="false" layoutX="446.0" layoutY="263.0" opacity="0.8" prefHeight="163.0" prefWidth="297.0" style="-fx-background-color: #000000;" wrapText="true" />
+      <Label fx:id="lblTimeBlanc" layoutX="446.0" layoutY="23.0" opacity="0.6" prefHeight="65.0" prefWidth="139.0" style="-fx-background-color: #ffffff; -fx-alignment: center;" text="00:00.000" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTimeNoir" layoutX="585.0" layoutY="23.0" opacity="0.6" prefHeight="65.0" prefWidth="139.0" style="-fx-background-color: #000000; -fx-alignment: center;" text="00:00.000" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnnouveau" defaultButton="true" layoutX="446.0" layoutY="109.0" mnemonicParsing="false" onAction="#btnNouveauClick" opacity="0.8" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #000055;" text="Nouveau" textFill="#a1b7b9">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <DropShadow color="#1800f5" height="100.0" radius="24.5" spread="0.2" width="0.0" />
+         </effect>
+      </Button>
+      <Button fx:id="btnAbandon" defaultButton="true" layoutX="595.0" layoutY="109.0" mnemonicParsing="false" onAction="#btnAbandonClick" opacity="0.8" prefHeight="38.0" prefWidth="139.0" style="-fx-background-color: #550055;" text="Abandonner" textFill="#a1b7b9">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <DropShadow color="#b805ff" height="50.0" radius="12.0" spread="0.21" width="0.0" />
+         </effect>
+      </Button>
+      <Button fx:id="btnMoteur" layoutX="446.0" layoutY="159.0" mnemonicParsing="false" onAction="#btnMoteurClick" opacity="0.8" prefHeight="50.0" prefWidth="289.0" style="-fx-background-color: #550055;" text="Noir : Stockfish 6" textFill="#a1b7b9">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <effect>
+            <DropShadow color="#9102a4" height="101.06" radius="24.765" spread="0.06" width="0.0" />
+         </effect>
+      </Button>
+      <Label fx:id="lblPlayer" layoutX="445.0" layoutY="220.0" opacity="0.7" prefHeight="33.0" prefWidth="289.0" style="-fx-background-color: #333333; -fx-alignment: center;" text="Les noirs jouent" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
