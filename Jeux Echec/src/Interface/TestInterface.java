@@ -22,8 +22,13 @@ public class TestInterface extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
+        
+        //mettre un titre a l'application
+        stage.setTitle("Jouons aux échecs");
+        //rendre la fenêtre non redimensionnable
+        stage.setResizable(false);
+
         stage.show();
     }
 
