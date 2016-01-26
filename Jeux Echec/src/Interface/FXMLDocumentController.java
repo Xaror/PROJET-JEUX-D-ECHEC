@@ -7,6 +7,7 @@ package Interface;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,13 +36,16 @@ public class FXMLDocumentController implements Initializable {
     private TextArea listCpW;
      @FXML
     private TextArea listCpB;
+     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-       Stage stage = (Stage) closeButton.getScene().getWindow();
-       
-                  
-        stage.close();
+        
     }
+    
+    @FXML
+    private void hcloseButton(ActionEvent event) {
+        Platform.exit();
+    }   
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
