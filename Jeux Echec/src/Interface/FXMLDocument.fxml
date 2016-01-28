@@ -13,7 +13,7 @@
             <Image url="@../Font/bg.png" />
          </image>
       </ImageView>
-      <Button fx:id="closeButton" layoutX="1063.0" layoutY="606.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="155.0" text="Fermer" />
+      <Button fx:id="closeButton" layoutX="1063.0" layoutY="606.0" mnemonicParsing="false" onAction="#hcloseButton" prefHeight="64.0" prefWidth="155.0" text="Fermer" />
       <ImageView fx:id="plateau" fitHeight="521.0" fitWidth="501.0" layoutX="68.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0">
          <image>
             <Image url="@../Font/echiquier.jpg" />
