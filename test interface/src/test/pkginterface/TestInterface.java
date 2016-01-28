@@ -22,8 +22,11 @@ public class TestInterface extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
-        
+        Chrono chrono = new Chrono();
         stage.setScene(scene);
+        stage.setTitle("Echec"); 
+        stage.setResizable(false); 
+        stage.centerOnScreen();
         stage.show();
     }
 

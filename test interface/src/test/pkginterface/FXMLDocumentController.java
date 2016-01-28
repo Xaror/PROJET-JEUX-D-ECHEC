@@ -8,9 +8,12 @@ package test.pkginterface;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
@@ -30,6 +33,8 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Label tmpW;
     @FXML
+    private Chrono chrono;
+    @FXML
     private Label tmpB;
     @FXML
     private TextArea listCpW;
@@ -37,15 +42,21 @@ public class FXMLDocumentController implements Initializable {
     private TextArea listCpB;
     @FXML
     private void handleButtonAction(ActionEvent event) {
-       Stage stage = (Stage) closeButton.getScene().getWindow();
-       
-                  
+       Stage stage = (Stage) closeButton.getScene().getWindow();                
         stage.close();
+    }
+    
+    
+    @FXML
+    private void btnStartClick(ActionEvent event) {
+       
+       chrono = new Chrono();
+       //var = chrono.play() ;
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
+ 
 }
