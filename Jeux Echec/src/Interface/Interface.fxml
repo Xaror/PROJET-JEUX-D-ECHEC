@@ -33,7 +33,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="StartGame" alignment="CENTER" contentDisplay="CENTER" layoutX="837.0" layoutY="127.0" mnemonicParsing="false" onAction="#btnStartClick" prefHeight="8.0" prefWidth="35.0" textAlignment="CENTER">       
+      <Button fx:id="StartGame" alignment="CENTER" contentDisplay="CENTER" layoutX="819.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnStartClick" prefHeight="8.0" prefWidth="35.0" textAlignment="CENTER">       
             
                    <!-- <graphic>
                         <ImageView fitHeight="58.0" fitWidth="61.5">
@@ -53,8 +53,8 @@
          </effect>            
                 
       </Button>
-      <Button fx:id="Abandon" layoutX="999.0" layoutY="127.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="113.0" text="Abandonner" />
-      <GridPane fx:id="grille" alignment="BOTTOM_CENTER" layoutX="78.0" layoutY="198.0" prefHeight="444.0" prefWidth="444.0">
+      <Button fx:id="Abandon" layoutX="957.0" layoutY="65.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="113.0" style="-fx-background-color: red;" text="Abandonner" textFill="WHITE" />
+      <GridPane fx:id="grille" alignment="BOTTOM_CENTER" layoutX="79.0" layoutY="210.0" prefHeight="444.0" prefWidth="444.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="56.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="55.0" />
@@ -78,6 +78,15 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         
       </GridPane>
+      <Button fx:id="btnMoteurClick" layoutX="969.0" layoutY="144.0" mnemonicParsing="false" opacity="0.8" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: #550055;" text="Noir : Stockfish 6" textFill="#a1b7b9">
+         <effect>
+            <DropShadow color="#9102a4" height="101.06" radius="24.765" spread="0.06" width="0.0" />
+         </effect>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -1,0 +1,1 @@
+Debug\protector.exe -t pgn\hard.pgn -e c:\tablebases
