@@ -69,6 +69,7 @@ public class Control_Interface implements Initializable {
     @FXML
     private GridPane grille;
     
+    boolean tour_blanc;
     boolean isEngineUP;
     private ArrayList<Piece> Piece;
    
@@ -460,14 +461,17 @@ public class Control_Interface implements Initializable {
                     XF="H";
                     break;
                 }
-                 for(Piece i:Piece){
+                //draggedApp.set
+                for(Piece i:Piece){
                       
                      if(draggedApp.getChildren().toString().equals(i.getid()))
                      {
                          if(i.gettype().equals("blanc")){
+                              tour_blanc=false;
                               String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
                               olb.add(phrase);
                          }else{
+                             tour_blanc=true;
                              String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
                              oln.add(phrase);
                          }
