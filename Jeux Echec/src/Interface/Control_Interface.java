@@ -15,6 +15,8 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -25,6 +27,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -60,58 +63,62 @@ public class Control_Interface implements Initializable {
     @FXML
     private Label tmpB;
     @FXML
-    private TextArea listCpW;
+    private ListView listCpW;
     @FXML
-    private TextArea listCpB;
+    private ListView listCpB;
     @FXML
     private GridPane grille;
     
     boolean isEngineUP;
+    
+    
+    
+    
      
        //charger tour 
-            ImageView TB1 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TB.gif")));     
-            ImageView TN1 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TN.gif")));
-            ImageView TB2 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TB.gif")));
-            ImageView TN2 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TN.gif")));
+            Piece TB1 = new Piece("TB1",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TB.gif")))),"blanc");     
+            Piece TN1 = new Piece("TN1",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TN.gif")))),"noire");
+            Piece TB2 = new Piece("TB2",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TB.gif")))),"blanc");
+            Piece TN2 = new Piece("TN2",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TN.gif")))),"noire");
         
         //charger cav     
-            ImageView CB1 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CB.gif")));
-            ImageView CN1 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CN.gif")));
-            ImageView CB2 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CB.gif")));
-            ImageView CN2 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CN.gif")));
+            Piece CB1 = new Piece("CB1",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CB.gif")))),"blanc");
+            Piece CN1 = new Piece("CN1",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CN.gif")))),"noire");
+            Piece CB2 = new Piece("CB2",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CB.gif")))),"blanc");
+            Piece CN2 = new Piece("CN2",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CN.gif")))),"noire");
             
         //charger fou   
-            ImageView FB1 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FB.gif")));
-            ImageView FN1 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FN.gif")));
-            ImageView FB2 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FB.gif")));
-            ImageView FN2 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FN.gif")));
+            Piece FB1 = new Piece("FB1",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FB.gif")))),"blanc");
+            Piece FN1 = new Piece("FN1",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FN.gif")))),"noire");
+            Piece FB2 = new Piece("FB2",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FB.gif")))),"blanc");
+            Piece FN2 = new Piece("FN2",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FN.gif")))),"noire");
             
          //charger dame     
-            ImageView DB = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/DB.gif")));
-            ImageView DN = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/DN.gif")));
+            Piece DB = new Piece("DB",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/DB.gif")))),"blanc");
+            Piece DN = new Piece("DN",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/DN.gif")))),"noire");
             
-        //charger roi blanc    
-            ImageView RB = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/RB.gif")));
-            ImageView RN = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/RN.gif")));
+        //charger roi    
+            Piece RB = new Piece("RB",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/RB.gif")))),"blanc");
+            Piece RN = new Piece("RN",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/RN.gif")))),"noire");
            
           
         //charger pion     
-            ImageView PB1 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")));
-            ImageView PN1 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")));
-            ImageView PB2 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")));
-            ImageView PN2 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")));
-            ImageView PB3 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")));
-            ImageView PN3 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")));
-            ImageView PB4 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")));
-            ImageView PN4 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")));
-            ImageView PB5 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")));
-            ImageView PN5 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")));
-            ImageView PB6 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")));
-            ImageView PN6 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")));
-            ImageView PB7 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")));
-            ImageView PN7 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")));
-            ImageView PB8 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")));
-            ImageView PN8 = new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")));
+            Piece PB1 = new Piece("PB1",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+            Piece PN1 = new Piece("PN1",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+            Piece PB2 = new Piece("PB2",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+            Piece PN2 = new Piece("PN2",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+            Piece PB3 = new Piece("PB3",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+            Piece PN3 = new Piece("PN3",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+            Piece PB4 = new Piece("PB4",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+            Piece PN4 = new Piece("PN4",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+            Piece PB5 = new Piece("PB5",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+            Piece PN5 = new Piece("PN5",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+            Piece PB6 = new Piece("PB6",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+            Piece PN6 = new Piece("PN6",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+            Piece PB7 = new Piece("PB7",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+            Piece PN7 = new Piece("PN7",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+            Piece PB8 = new Piece("PB8",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+            Piece PN8 = new Piece("PN8",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
             
            
         
@@ -158,80 +165,145 @@ public class Control_Interface implements Initializable {
             grille.setGridLinesVisible(true);
             final int appsPerRow = 8;
             
-                Pane app = createApp(grille, 0, appsPerRow, true);
-                 app.getChildren().add(TN1);
+                Pane app = createApp(grille, 0, appsPerRow, false);
+                 app.getChildren().add(TN1.getimg());
+                 TN1.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 1, appsPerRow, true);
-                 app.getChildren().add(CN1);
+                 app.getChildren().add(CN1.getimg());
+                 CN1.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 2, appsPerRow, true);
-                 app.getChildren().add(FN1);
+                 app.getChildren().add(FN1.getimg());
+                 FN1.setid(app.getChildren().toString());
+                
                  app = createApp(grille, 3, appsPerRow, true);
-                 app.getChildren().add(RN);
+                 app.getChildren().add(RN.getimg());
+                 RN.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 4, appsPerRow, true);
-                 app.getChildren().add(DN);
+                 app.getChildren().add(DN.getimg());
+                 DN.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 5, appsPerRow, true);
-                 app.getChildren().add(FN2);
+                 app.getChildren().add(FN2.getimg());
+                 FN2.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 6, appsPerRow, true);
-                 app.getChildren().add(CN2);
+                 app.getChildren().add(CN2.getimg());
+                 CN2.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 7, appsPerRow, true);
-                 app.getChildren().add(TN2);
+                 app.getChildren().add(TN2.getimg());
+                 TN2.setid(app.getChildren().toString());
                  
                  app = createApp(grille, 8, appsPerRow, true);
-                 app.getChildren().add(PN1);
+                 app.getChildren().add(PN1.getimg());
+                 PN1.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 9, appsPerRow, true);
-                 app.getChildren().add(PN2);
+                 app.getChildren().add(PN2.getimg());
+                 PN2.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 10, appsPerRow, true);
-                 app.getChildren().add(PN3);
+                 app.getChildren().add(PN3.getimg());
+                 PN3.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 11, appsPerRow, true);
-                 app.getChildren().add(PN4);
+                 app.getChildren().add(PN4.getimg());
+                 PN4.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 12, appsPerRow, true);
-                 app.getChildren().add(PN5);
+                 app.getChildren().add(PN5.getimg());
+                 PN5.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 13, appsPerRow, true);
-                 app.getChildren().add(PN6);
+                 app.getChildren().add(PN6.getimg());
+                 PN6.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 14, appsPerRow, true);
-                 app.getChildren().add(PN7);
+                 app.getChildren().add(PN7.getimg());
+                 PN7.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 15, appsPerRow, true);
-                 app.getChildren().add(PN8);
+                 app.getChildren().add(PN8.getimg());
+                 PN8.setid(app.getChildren().toString());
+                 
                  
                  
                  app = createApp(grille, 56, appsPerRow, false);
-                 app.getChildren().add(TB1);
+                 app.getChildren().add(TB1.getimg());
+                 TB1.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 57, appsPerRow, false);
-                 app.getChildren().add(CB1);
+                 app.getChildren().add(CB1.getimg());
+                 CB1.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 58, appsPerRow, false);
-                 app.getChildren().add(FB1);
+                 app.getChildren().add(FB1.getimg());
+                 FB1.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 59, appsPerRow, false);
-                 app.getChildren().add(RB);
+                 app.getChildren().add(RB.getimg());
+                 RB.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 60, appsPerRow, false);
-                 app.getChildren().add(DB);
+                 app.getChildren().add(DB.getimg());
+                 DB.setid(app.getChildren().toString());
+                 
                  app = createApp(grille,61, appsPerRow, false);
-                 app.getChildren().add(FB2);
+                 app.getChildren().add(FB2.getimg());
+                 FB2.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 62, appsPerRow, false);
-                 app.getChildren().add(CB2);
+                 app.getChildren().add(CB2.getimg());
+                 CB2.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 63, appsPerRow, false);
-                 app.getChildren().add(TB2);
+                 app.getChildren().add(TB2.getimg());
+                 TB2.setid(app.getChildren().toString());
+                 
                  
                  app = createApp(grille, 55, appsPerRow, false);
-                 app.getChildren().add(PB1);
+                 app.getChildren().add(PB1.getimg());
+                 PB1.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 54, appsPerRow, false);
-                 app.getChildren().add(PB2);
+                 app.getChildren().add(PB2.getimg());
+                 PB2.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 53, appsPerRow, false);
-                 app.getChildren().add(PB3);
+                 app.getChildren().add(PB3.getimg());
+                 PB3.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 52, appsPerRow, false);
-                 app.getChildren().add(PB4);
+                 app.getChildren().add(PB4.getimg());
+                 PB4.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 51, appsPerRow, false);
-                 app.getChildren().add(PB5);
+                 app.getChildren().add(PB5.getimg());
+                 PB5.setid(app.getChildren().toString());
+                 
+                 
                  app = createApp(grille, 50, appsPerRow, false);
-                 app.getChildren().add(PB6);
+                 app.getChildren().add(PB6.getimg());
+                 PB6.setid(app.getChildren().toString());
+                 
+                 
                  app = createApp(grille, 49, appsPerRow, false);
-                 app.getChildren().add(PB7);
+                 app.getChildren().add(PB7.getimg());
+                 PB7.setid(app.getChildren().toString());
+                 
                  app = createApp(grille, 48, appsPerRow, false);
-                 app.getChildren().add(PB8);
+                 app.getChildren().add(PB8.getimg());
+                 PB8.setid(app.getChildren().toString());
+                 
                 
     /*for (int i = 0; i < 4; i++) {
       Pane app = createApp(grille, i, appsPerRow, false);
       app.getChildren().add(new Text("App " + (i + 1)));
     }*/
-            for (int i = 1; i < 48; i++) {
+            for (int i = 0; i < 48; i++) {
                 createApp(grille, i, appsPerRow, false);
             }
         }
@@ -245,8 +317,8 @@ public class Control_Interface implements Initializable {
 
             final int x = appNumber % appsPerRow;
             final int y = appNumber / appsPerRow;
-            System.out.println("x " + x);
-            System.out.println("y " + y);
+           // System.out.println("x " + x);
+           // System.out.println("y " + y);
             root.add(app, x, y);
             app.setMinWidth(55);
             app.setMinHeight(55);
@@ -267,8 +339,8 @@ public class Control_Interface implements Initializable {
                 }
               });
               app.setOnDragOver(new EventHandler<DragEvent>() {
-              @Override
-              public void handle(DragEvent event) {
+        @Override
+        public void handle(DragEvent event) {
                 Dragboard db = event.getDragboard();
                 boolean accept = false;
                 if (db.hasString()) {
@@ -290,13 +362,24 @@ public class Control_Interface implements Initializable {
             });
             app.setOnDragDropped(new EventHandler<DragEvent>() {
 
-              public void handle(DragEvent event) {
+        public void handle(DragEvent event) {
                 Pane draggedApp = (Pane) event.getGestureSource();
                 // switch panes:
                 int draggedX = GridPane.getColumnIndex(draggedApp);
                 int draggedY = GridPane.getRowIndex(draggedApp);
                 int droppedX = GridPane.getColumnIndex(app);
                 int droppedY = GridPane.getRowIndex(app);
+                
+                 System.out.println(draggedApp.getChildren());
+                //listCpW.setText(draggedX + " " + draggedY + " - " + droppedX + " " + droppedY);
+                String phrase =  draggedX + " " + draggedY + " - " + droppedX + " " + droppedY ;
+                ol2.add(phrase);
+                //System.out.println("tour blanche");
+               
+                /*System.out.println("xo " + draggedX);
+                System.out.println("yo " + draggedY);
+                System.out.println("xf " + droppedX);
+                System.out.println("yf " + droppedY);*/
                 GridPane.setColumnIndex(draggedApp, droppedX);
                 GridPane.setRowIndex(draggedApp, droppedY);
                 GridPane.setColumnIndex(app, draggedX);
@@ -307,15 +390,15 @@ public class Control_Interface implements Initializable {
 
             } return app;
                 }
-            @FXML
-            private void handleButtonAction(ActionEvent event) {
+        @FXML
+        private void handleButtonAction(ActionEvent event) {
                Stage stage = (Stage) closeButton.getScene().getWindow();                
                 stage.close();
             }
 
 
-            @FXML
-            private void btnStartClick(ActionEvent event) {
+        @FXML
+        private void btnStartClick(ActionEvent event) {
 
               // chrono = new Chrono();
                //var = chrono.play() ;
@@ -326,11 +409,14 @@ public class Control_Interface implements Initializable {
 
 
 
-
-            @Override
-            public void initialize(URL url, ResourceBundle rb) {
+        ObservableList<String> ol1=FXCollections.observableArrayList();
+        ObservableList<String> ol2=FXCollections.observableArrayList();
+        @Override
+        public void initialize(URL url, ResourceBundle rb) {
                 // TODO
                 charge_pieces();
+                listCpB.setItems(ol1);
+                listCpW.setItems(ol2);
                  //charger le moteur si possible
                /* btnMoteur.setText("MOTEUR : Aucun");
                 String engine=read_Engine();

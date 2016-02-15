@@ -21,8 +21,6 @@
             <Image url="@font/echiquier.jpg" />
          </image>
       </ImageView>
-      <TextArea fx:id="listCpB" editable="false" layoutX="727.0" layoutY="303.0" prefHeight="303.0" prefWidth="219.0" />
-      <TextArea fx:id="listCpW" editable="false" layoutX="946.0" layoutY="303.0" prefHeight="303.0" prefWidth="219.0" />
       <Label fx:id="tmpW" alignment="CENTER" layoutX="727.0" layoutY="214.0" opacity="0.63" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: Black;" text="00.00.00" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="24.0" />
@@ -88,5 +86,7 @@
             <Font size="18.0" />
          </font>
       </Button>
+      <ListView fx:id="listCpB" layoutX="727.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
+      <ListView fx:id="listCpW" layoutX="946.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
    </children>
 </AnchorPane>
