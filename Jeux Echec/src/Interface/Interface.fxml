@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" fx:id="closeButtonAction" focusTraversable="true" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-image: url('Interface/font/bg.png');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.Control_Interface">
+<AnchorPane id="AnchorPane" fx:id="closeButtonAction" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1270.0" style="-fx-background-image: url('Interface/font/bg.png');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.Control_Interface">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" visible="false">
+      <Button fx:id="closeButton" layoutX="1056.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="155.0" text="Fermer" />
+      <ImageView fx:id="plateau" fitHeight="521.0" fitWidth="501.0" layoutX="100.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@font/bg.png" />
+            <Image url="@font/echiquier.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="closeButton" layoutX="1056.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="155.0" text="Fermer" />
       <Label fx:id="tmpW" alignment="CENTER" layoutX="727.0" layoutY="214.0" opacity="0.63" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: Black;" text="00.00.00" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="24.0" />
@@ -47,7 +47,17 @@
                 
       </Button>
       <Button fx:id="Abandon" layoutX="957.0" layoutY="65.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="113.0" style="-fx-background-color: red;" text="Abandonner" textFill="WHITE" />
-      <GridPane fx:id="grille" alignment="BOTTOM_CENTER" layoutX="79.0" layoutY="198.0" prefHeight="444.0" prefWidth="444.0">
+      <Button fx:id="btnMoteurClick" layoutX="969.0" layoutY="144.0" mnemonicParsing="false" opacity="0.8" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: #550055;" text="Noir : Stockfish 6" textFill="#a1b7b9">
+         <effect>
+            <DropShadow color="#9102a4" height="101.06" radius="24.765" spread="0.06" width="0.0" />
+         </effect>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <ListView fx:id="listCpB" layoutX="727.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
+      <ListView fx:id="listCpW" layoutX="946.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
+      <GridPane fx:id="grille" alignment="BOTTOM_CENTER" layoutX="129.0" layoutY="191.0" prefHeight="444.0" prefWidth="444.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="56.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="55.0" />
@@ -73,15 +83,6 @@
          </cursor>
          
       </GridPane>
-      <Button fx:id="btnMoteurClick" layoutX="969.0" layoutY="144.0" mnemonicParsing="false" opacity="0.8" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: #550055;" text="Noir : Stockfish 6" textFill="#a1b7b9">
-         <effect>
-            <DropShadow color="#9102a4" height="101.06" radius="24.765" spread="0.06" width="0.0" />
-         </effect>
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <ListView fx:id="listCpB" layoutX="727.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
-      <ListView fx:id="listCpW" layoutX="946.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
+      
    </children>
 </AnchorPane>
