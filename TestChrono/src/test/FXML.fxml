@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="test.FXMLDocumentController">
+   <children>
+      <Label fx:id="lblChrono1" alignment="CENTER" layoutX="53.0" layoutY="81.0" opacity="0.63" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: Black;" text="00.00.00" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblChrono2" alignment="CENTER" layoutX="321.0" layoutY="81.0" opacity="0.56" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: White;" text="00.00.00" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnStart1" layoutX="137.0" layoutY="175.0" onAction="#hbtnStart1" text="Start" />
+      <Button fx:id="btnStart2" layoutX="410.0" layoutY="175.0" onAction="#hbtnStart2" text="Start" />
+      <Button fx:id="btnStop1" layoutX="137.0" layoutY="229.0" onAction="#hbtnStop1" text="Stop" />
+      <Button fx:id="btnStop2" layoutX="410.0" layoutY="229.0" onAction="#hbtnStop2" text="Stop" />
+      <Button fx:id="btnReset1" layoutX="135.0" layoutY="277.0" onAction="#hbtnReset1" text="Reset" />
+      <Button fx:id="btnReset2" layoutX="408.0" layoutY="277.0" onAction="#hbtnReset2" text="Reset" />
+   </children>
+</AnchorPane>
