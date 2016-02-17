@@ -46,7 +46,7 @@
          </effect>            
                 
       </Button>
-      <Button fx:id="Abandon" layoutX="957.0" layoutY="65.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="113.0" style="-fx-background-color: red;" text="Abandonner" textFill="WHITE" />
+      <Button fx:id="Abandon" layoutX="957.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnAbandonClick" prefHeight="42.0" prefWidth="113.0" style="-fx-background-color: red;" text="Abandonner" textFill="WHITE" />
       <Button fx:id="btnMoteurClick" layoutX="969.0" layoutY="144.0" mnemonicParsing="false" opacity="0.8" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: #550055;" text="Noir : Stockfish 6" textFill="#a1b7b9">
          <effect>
             <DropShadow color="#9102a4" height="101.06" radius="24.765" spread="0.06" width="0.0" />

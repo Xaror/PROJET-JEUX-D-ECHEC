@@ -15,6 +15,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -69,11 +70,13 @@ public class Control_Interface implements Initializable {
     @FXML
     private GridPane grille;
     
-    boolean tour_blanc;
+    boolean tour_blanc = true;
     boolean isEngineUP;
     private ArrayList<Piece> Piece;
+    /**/
+    private Chronometre ChronoW ;
+    private Chronometre ChronoB;
    
-    
     
     
     
@@ -127,46 +130,13 @@ public class Control_Interface implements Initializable {
         
             
     
-        private void charge_pieces(){
-                       
-           /* grille.add(TN1,0,0);
-            grille.add(CN1,1,0);
-            grille.add(FN1,2,0);
-            grille.add(RN,3,0);
-            grille.add(DN,4,0);
-            grille.add(FN2,5,0);
-            grille.add(CN2,6,0);
-            grille.add(TN2,7,0);
-            grille.add(PN1,0,1);
-            grille.add(PN2,1,1);
-            grille.add(PN3,2,1);
-            grille.add(PN4,3,1);
-            grille.add(PN5,4,1);
-            grille.add(PN6,5,1);
-            grille.add(PN7,6,1);
-            grille.add(PN8,7,1);
-            
-            grille.add(TB1,0,7);
-            grille.add(CB1,1,7);
-            grille.add(FB1,2,7);
-            grille.add(RB,3,7);
-            grille.add(DB,4,7);
-            grille.add(FB2,5,7);
-            grille.add(CB2,6,7);
-            grille.add(TB2,7,7);
-            grille.add(PB1,0,6);
-            grille.add(PB2,1,6);
-            grille.add(PB3,2,6);
-            grille.add(PB4,3,6);
-            grille.add(PB5,4,6);
-            grille.add(PB6,5,6);
-            grille.add(PB7,6,6);
-            grille.add(PB8,7,6);
-            
-            */
-            
+        private void charge_pieces(){           
             grille.setGridLinesVisible(true);
             final int appsPerRow = 8;
+            
+            for (int i = 0; i < 63; i++) {
+                createApp(grille, i, appsPerRow, false);
+            }
             
                 Pane app = createApp(grille, 0, appsPerRow, false);
                  app.getChildren().add(TN1.getimg());
@@ -331,15 +301,6 @@ public class Control_Interface implements Initializable {
                  app.getChildren().add(PB8.getimg());
                  PB8.setid(app.getChildren().toString());
                  Piece.add(PB8);
-                 
-                
-    /*for (int i = 0; i < 4; i++) {
-      Pane app = createApp(grille, i, appsPerRow, false);
-      app.getChildren().add(new Text("App " + (i + 1)));
-    }*/
-            for (int i = 16; i < 48; i++) {
-                createApp(grille, i, appsPerRow, false);
-            }
         }
        
         
@@ -462,48 +423,87 @@ public class Control_Interface implements Initializable {
                     break;
                 }
                 //draggedApp.set
+                System.out.println(" tour debut" + tour_blanc);
                 for(Piece i:Piece){
                       
                      if(draggedApp.getChildren().toString().equals(i.getid()))
                      {
-                         if(i.gettype().equals("blanc")){
-                              tour_blanc=false;
-                              String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
-                              olb.add(phrase);
+                         if(i.gettype().equals("blanc") ){
+                              
+                              if( tour_blanc == true)
+                              {
+                                  String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
+                                  olb.add(phrase);
+                                  System.out.println(" move blanc " );
+                                  GridPane.setColumnIndex(draggedApp, droppedX);
+                                  GridPane.setRowIndex(draggedApp, droppedY);
+                                  GridPane.setColumnIndex(app, draggedX);
+                                  GridPane.setRowIndex(app, draggedY);
+                                  tour_blanc=false;
+                                  //ChronoW.stop();
+                                  //ChronoB.play();
+                              }
                          }else{
-                             tour_blanc=true;
-                             String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
-                             oln.add(phrase);
+                              if( tour_blanc == false)
+                                {
+                                  String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
+                                  oln.add(phrase);
+                                  System.out.println(" move noir " );
+                                  GridPane.setColumnIndex(draggedApp, droppedX);
+                                  GridPane.setRowIndex(draggedApp, droppedY);
+                                  GridPane.setColumnIndex(app, draggedX);
+                                  GridPane.setRowIndex(app, draggedY);
+                                  tour_blanc=true;
+                                 // ChronoB.stop();
+                                  //ChronoW.play();
+                                }
                          }
                      }
-                 }
+                     
+                 }System.out.println(" tour fin " + tour_blanc);
              
-                GridPane.setColumnIndex(draggedApp, droppedX);
-                GridPane.setRowIndex(draggedApp, droppedY);
-                GridPane.setColumnIndex(app, draggedX);
-                GridPane.setRowIndex(app, draggedY);
+                
               }
             });
 
 
             } return app;
-                }
+        }
         @FXML
         private void handleButtonAction(ActionEvent event) {
-               Stage stage = (Stage) closeButton.getScene().getWindow();                
-                stage.close();
+               Platform.exit();
             }
 
 
         @FXML
         private void btnStartClick(ActionEvent event) {
-
-              // chrono = new Chrono();
-               //var = chrono.play() ;
+            tour_blanc = true;
+            charge_pieces();
+            Go_Chrono();
+            //ChronoW.play();
+            }
+        @FXML
+        private void btnAbandonClick(ActionEvent event) {
+            
+            Stop_Chrono();
+            //ChronoW.play();
             }
 
 
+                // Fonctions pour le chronometre
+        static long chrono = 0 ;
 
+        // Lancement du chrono
+        static void Go_Chrono() {
+        chrono = java.lang.System.currentTimeMillis() ;
+        }
+
+        // Arret du chrono
+        static void Stop_Chrono() {
+        long chrono2 = java.lang.System.currentTimeMillis() ;
+        long temps = chrono2 - chrono ;
+        System.out.println("Temps ecoule = " + temps + " ms") ;
+        } 
 
 
 
@@ -513,11 +513,14 @@ public class Control_Interface implements Initializable {
         public void initialize(URL url, ResourceBundle rb) {
                 // TODO
                 Piece = new ArrayList<Piece>();
-                charge_pieces();
+                ChronoW = new Chronometre(tmpW);
+                ChronoB = new Chronometre(tmpB);
                 
-                
+               //ChronoW.setLbl(tmpW);
+               // ChronoB.setLbl(tmpB);
                 listCpB.setItems(oln);
                 listCpW.setItems(olb);
+                
                  //charger le moteur si possible
                /* btnMoteur.setText("MOTEUR : Aucun");
                 String engine=read_Engine();
