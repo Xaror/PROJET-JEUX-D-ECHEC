@@ -40,26 +40,23 @@ public class FXMLDocumentController implements Initializable {
     
     private Chronometre chrono1;
     private Chronometre chrono2;
-    
-    ObservableList<Chronometre> chronos=FXCollections.observableArrayList();
-   
-    
+      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-            
+          chrono1 = new Chronometre();
+          chrono2 = new Chronometre();
     }
     
     @FXML
     private void hbtnStart1(ActionEvent event) {
-        chrono1 = new Chronometre();
-        
+        chrono1.play();   
         lblChrono1.setText(String.valueOf(chrono1));
-        chrono1.play();
+        
     }  
     
     @FXML
     private void hbtnStart2(ActionEvent event) {
-        chrono2 = new Chronometre();
+        lblChrono2.setText(chrono2.toString());
         chrono2.play();        
     } 
     
