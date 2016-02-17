@@ -18,6 +18,7 @@ public class Piece {
     private ImageView img;
     private String id;
     private String type;
+    private String couleur;
     
     
     
@@ -43,6 +44,14 @@ public class Piece {
     }
     public void settype( String type){
         this.type=type;
+    }
+    public void setCouleur(String couleur){
+	if ((couleur == "noir") || (couleur == "blanc"))
+	this.couleur = couleur;
+    }
+    
+    public String getCouleur(){
+	return couleur;
     }
     public boolean deplacementValide(int XD,int YD,int XF,int YF, boolean e ){
 	Position depart = new Position(XD , YD);

@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -43,6 +45,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import JeuxEchecs.Echiquier;
 
 /**
  *
@@ -441,29 +444,52 @@ public class Control_Interface implements Initializable {
                               {
                                     System.out.println(" move blanc " );
                                     for(Piece j:Piece){
-                                    if(cible.getChildren().toString().equals(j.getid())){
-                                        if(j.gettype().equals("noire")){
+                                        
+                                        if(cible.getChildren().toString().equals(j.getid())){
+                                           
+                                        if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi))
+                                            deplacement_ok = false;
+                                    
+                                            if(j.gettype().equals("noire") &&  deplacement_ok == true){
+                                            if(j.getnom().equals("Pion") && draggedX-droppedX==0 ){
+                                               deplacement_ok = false; 
+                                            }
+                                            else{
+                                            if(j.getnom().equals("Roi")){
+                                                cible.getChildren().clear();                                                
+                                                Alert alert = new Alert(AlertType.CONFIRMATION);
+                                                alert.setTitle("Echec et Mate");
+                                                alert.setHeaderText("Les noires on gagné !!!");
+                                                alert.setContentText("Voulez vous recommencer une partie ou quiiter le jeu?");
+
+                                                Optional<ButtonType> result = alert.showAndWait();
+                                                if (result.get() == ButtonType.OK){
+                                                    restart();
+                                                } else {
+                                                    Platform.exit();
+                                                }
+                                               
+                                                }
                                             cible.getChildren().clear();
                                             ennemi = true;
+                                            }
+                                            
+                                        } 
+                                            if(j.gettype().equals("blanc")){
+                                                if((j.getnom().equals("Tour") && i.getnom().equals("Roi")) || (i.getnom().equals("Tour") && j.getnom().equals("Roi")) ){
+                                                    if(rock_b_possible == true)
+                                                    {    
+
+                                                        rock_b_possible = false;
+
+                                                    }else{
+                                                        deplacement_ok = false;
+                                                    }
+                                                 }else deplacement_ok = false;
+                                                 }
                                         }
-                                        if(j.gettype().equals("blanc")){
-                                            if((j.getnom().equals("Tour") && i.getnom().equals("Roi")) || (i.getnom().equals("Tour") && j.getnom().equals("Roi")) ){
-                                                if(rock_b_possible == true)
-                                                {    
-                                                   
-                                                    rock_b_possible = false;
-                                                    
-                                                }else{
-                                                    deplacement_ok = false;
-                                                }
-                                             }else deplacement_ok = false;
-                                             }
-                                         }
-                                     }
-                                    System.out.println(i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi) + " " + deplacement_ok );
-                                    if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi))
-                                        deplacement_ok = false;
-                                     System.out.println(deplacement_ok );   
+                                    }
+                                       
                                     
                                      if(deplacement_ok == true){
                                             String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
@@ -473,7 +499,7 @@ public class Control_Interface implements Initializable {
                                             GridPane.setColumnIndex(app, draggedX);
                                             GridPane.setRowIndex(app, draggedY);
                                             tour_blanc=false;
-                                            Tour.setText("Tour des noir !");
+                                            Tour.setText("Tour des noirs !");
                                             ChronoW.stop();
                                             ChronoB.play();
                                      }
@@ -485,8 +511,31 @@ public class Control_Interface implements Initializable {
                                   
                                   for(Piece j:Piece){
                                     if(cible.getChildren().toString().equals(j.getid())){
-                                        if(j.gettype().equals("blanc")){
+                                        if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi))
+                                        deplacement_ok = false;
+                                        if(j.gettype().equals("blanc") && deplacement_ok == true ){
+                                            if(j.getnom().equals("Pion") && draggedX-droppedX==0 ){
+                                               deplacement_ok = false; 
+                                            }
+                                            else{
+                                            if(j.getnom().equals("Roi")){
+                                                cible.getChildren().clear();                                                
+                                                Alert alert = new Alert(AlertType.CONFIRMATION);
+                                                alert.setTitle("Echec et Mate");
+                                                alert.setHeaderText("Les blancs on gagné !!!");
+                                                alert.setContentText("Voulez vous recommencer une partie ou quiiter le jeu?");
+
+                                                Optional<ButtonType> result = alert.showAndWait();
+                                                if (result.get() == ButtonType.OK){
+                                                    restart();
+                                                } else {
+                                                    Platform.exit();
+                                                }
+                                               
+                                                }
                                             cible.getChildren().clear();
+                                            ennemi = true;
+                                            }
                                             
                                         }
                                         if(j.gettype().equals("noire")){
@@ -504,8 +553,7 @@ public class Control_Interface implements Initializable {
                                     }
                                   }
                                    
-                                    if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi))
-                                        deplacement_ok = false;
+                                    
                                      
                                   if(deplacement_ok == true){
                                         String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
@@ -514,7 +562,7 @@ public class Control_Interface implements Initializable {
                                         GridPane.setRowIndex(draggedApp, droppedY);
                                         GridPane.setColumnIndex(app, draggedX);
                                         GridPane.setRowIndex(app, draggedY);
-                                         Tour.setText("Tour des blanc !");
+                                         Tour.setText("Tour des blancs !");
                                         tour_blanc=true;
                                         ChronoB.stop();
                                         ChronoW.play();
@@ -572,7 +620,20 @@ public class Control_Interface implements Initializable {
         private void vide_grille(){
             grille.getChildren().clear();
         }
-
+           private void restart(){
+            tour_blanc = true;
+            ChronoW.stop();
+            ChronoW.reset();
+            ChronoB.stop();
+            ChronoB.reset();
+            vide_grille();
+            listCpW.getItems().clear();
+            listCpB.getItems().clear();
+            tmpW.setText("00:00:000");
+            tmpB.setText("00:00:000");
+            Tour.setText("");
+            StartGame.setDisable(false);
+           }
 
         ObservableList<String> oln=FXCollections.observableArrayList();
         ObservableList<String> olb=FXCollections.observableArrayList();
@@ -580,6 +641,8 @@ public class Control_Interface implements Initializable {
         public void initialize(URL url, ResourceBundle rb) {
                 // TODO
                 Piece = new ArrayList<Piece>();
+                
+                Echiquier E = new Echiquier();
                 
                 
                 listCpB.setItems(oln);
