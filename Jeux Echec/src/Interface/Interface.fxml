@@ -19,12 +19,12 @@
             <Image url="@font/echiquier.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="tmpW" alignment="CENTER" layoutX="727.0" layoutY="214.0" opacity="0.63" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: Black;" text="00.00.00" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="tmpB" alignment="CENTER" layoutX="947.0" layoutY="214.0" opacity="0.63" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: Black;" text="00.00.00" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="tmpB" alignment="CENTER" layoutX="946.0" layoutY="214.0" opacity="0.56" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: White;" text="00.00.00" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="tmpW" alignment="CENTER" layoutX="727.0" layoutY="214.0" opacity="0.56" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: White;" text="00.00.00" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>
@@ -61,8 +61,8 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <ListView fx:id="listCpB" layoutX="727.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
-      <ListView fx:id="listCpW" layoutX="946.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
+      <ListView fx:id="listCpB" layoutX="947.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
+      <ListView fx:id="listCpW" layoutX="727.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
       <GridPane fx:id="grille" alignment="BOTTOM_CENTER" layoutX="129.0" layoutY="191.0" prefHeight="444.0" prefWidth="444.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="56.0" />

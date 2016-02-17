@@ -17,12 +17,16 @@ import javafx.util.Duration;
  *
  * @author Utilisateur
  */
-public class Chronometre extends HBox{
+public class Chronometre{
 
     private Label Lbl;
     private long timeCounter;
     private Timeline timeline = new Timeline();
-
+    private long chrono = 0; 
+    private long temps = 0 ;
+    private long temps_total = 0;
+    private boolean first = true;
+    
    
     public Chronometre(Label lb){
         Lbl=lb;
@@ -34,7 +38,7 @@ public class Chronometre extends HBox{
     public Chronometre(Duration duration){		
 	timeCounter = (long)duration.toMillis();
 	updateLabels(timeCounter);
-        getChildren().add(Lbl);
+        //getChildren().add(Lbl);
 	timeline = new Timeline(new KeyFrame(Duration.millis(1), new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent arg0){
@@ -65,12 +69,21 @@ public class Chronometre extends HBox{
     }
 
     public void play(){
-        //setTime(time);
+        if(first == true){
+          chrono =  java.lang.System.currentTimeMillis() ;
+          first = false;
+        }
+        
         timeline.play();
     }
 
     public void stop(){
         timeline.stop();
+        long chrono2 = java.lang.System.currentTimeMillis() ;
+        temps = chrono2 - chrono ;
+        temps_total = temps + getTime();
+        chrono = java.lang.System.currentTimeMillis() ;
+        setTime(temps_total);
     }
 	
     public void reset(){
@@ -88,6 +101,11 @@ public class Chronometre extends HBox{
         Lbl.setText(sMin + " : " + sSec + " : " + sMil);
         
     }
+    
+    
+        
+        
+    
 
     
     

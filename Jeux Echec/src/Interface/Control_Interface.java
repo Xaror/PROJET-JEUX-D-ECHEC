@@ -442,7 +442,7 @@ public class Control_Interface implements Initializable {
                                     GridPane.setColumnIndex(app, draggedX);
                                     GridPane.setRowIndex(app, draggedY);
                                     tour_blanc=false;
-                                    System.out.println(ChronoW.getTime());
+                                    System.out.println(" timer " + ChronoW.getTime());
                                     
                                   
                                   Tour.setText("Tour noir !");
@@ -488,7 +488,11 @@ public class Control_Interface implements Initializable {
             tour_blanc = true;
             charge_pieces();
             Tour.setText("Tour blanc !");
-           // Go_Chrono();
+           
+            ChronoW = new Chronometre(tmpW);
+            ChronoB = new Chronometre(tmpB);
+            ChronoW.setLbl(tmpW);
+            ChronoB.setLbl(tmpB);
            
             ChronoW.play();
             }
@@ -501,7 +505,7 @@ public class Control_Interface implements Initializable {
 
         
         // Fonctions pour le chronometre
-        static long chrono = 0 ;
+     /*   static long chrono = 0 ;
         
         // Lancement du chrono
         static void Go_Chrono() {
@@ -513,7 +517,7 @@ public class Control_Interface implements Initializable {
         long chrono2 = java.lang.System.currentTimeMillis() ;
         long temps = chrono2 - chrono ;
         return temps;
-        } 
+        } */
 
 
         ObservableList<String> oln=FXCollections.observableArrayList();
@@ -522,11 +526,8 @@ public class Control_Interface implements Initializable {
         public void initialize(URL url, ResourceBundle rb) {
                 // TODO
                 Piece = new ArrayList<Piece>();
-                ChronoW = new Chronometre(tmpW);
-                ChronoB = new Chronometre(tmpB);
-                Go_Chrono();
-                ChronoW.setLbl(tmpW);
-                ChronoB.setLbl(tmpB);
+                
+                
                 listCpB.setItems(oln);
                 listCpW.setItems(olb);
                 
