@@ -89,7 +89,7 @@
          </cursor>
          
       </GridPane>
-      <Label fx:id="Tour" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="107.0" opacity="0.56" prefHeight="64.0" prefWidth="501.0" style="-fx-background-color: Cyan;" textAlignment="CENTER">
+      <Label fx:id="Tour" alignment="CENTER" contentDisplay="CENTER" layoutX="101.0" layoutY="96.0" opacity="0.56" prefHeight="64.0" prefWidth="501.0" style="-fx-background-color: Cyan;" textAlignment="CENTER">
          <font>
             <Font name="Comic Sans MS Bold" size="24.0" />
          </font>

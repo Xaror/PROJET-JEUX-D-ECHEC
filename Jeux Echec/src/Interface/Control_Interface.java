@@ -538,7 +538,7 @@ public class Control_Interface implements Initializable {
         private void btnStartClick(ActionEvent event) {
             tour_blanc = true;
             charge_pieces();
-            Tour.setText("Tour blanc !");
+            Tour.setText("Tour des blancs !");
            
             ChronoW = new Chronometre(tmpW);
             ChronoB = new Chronometre(tmpB);
