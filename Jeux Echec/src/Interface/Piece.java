@@ -44,7 +44,7 @@ public class Piece {
     public void settype( String type){
         this.type=type;
     }
-    public boolean deplacementValide(int XD,int YD,int XF,int YF ){
+    public boolean deplacementValide(int XD,int YD,int XF,int YF, boolean e ){
 	Position depart = new Position(XD , YD);
         Position arrive = new Position(XF , YF);
         Deplacement dep = new Deplacement(depart , arrive);
@@ -67,7 +67,7 @@ public class Piece {
                     status = deplacementroi(dep);  
                     break;
                   case "Pion":
-                    status = deplacementpion(dep);  
+                    status = deplacementpion(dep, e);  
                     break;
                 }
             				
@@ -79,7 +79,7 @@ public class Piece {
             && Math.abs(deplacement.getDeplacementX()) - Math.abs(deplacement.getDeplacementY()) >= -1
             && !deplacement.deplacementNul();
     }
-    public boolean deplacementpion(Deplacement dep){
+    public boolean deplacementpion(Deplacement dep, boolean ennemi ){
 	if(dep.getDeplacementX() == 0){
             if (this.gettype().equals("noire")){ 
                 return dep.getDeplacementY() <= (dep.getDepart().getLigne() == 1 ? 2 : 1) && dep.getDeplacementY() > 0;
@@ -88,7 +88,7 @@ public class Piece {
                 return dep.getDeplacementY() >= (dep.getDepart().getLigne() == 6 ? -2 : -1) && dep.getDeplacementY() < 0;
                 }
         }
-        if(dep.getDeplacementX() == 1 || dep.getDeplacementX() == -1){
+        if((dep.getDeplacementX() == 1 || dep.getDeplacementX() == -1) && ennemi == true){
             if (this.gettype().equals("noire")){ 
                 return dep.getDeplacementY() <= (dep.getDepart().getLigne() == 1 ? 1 : 1) && dep.getDeplacementY() > 0;
             }

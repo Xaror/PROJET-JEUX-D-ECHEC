@@ -365,6 +365,7 @@ public class Control_Interface implements Initializable {
                 Pane draggedApp = (Pane) event.getGestureSource();
                 Pane cible = (Pane) event.getGestureTarget();
                 boolean deplacement_ok = true;
+                boolean ennemi = false;
                 // switch panes:
                 int draggedX = GridPane.getColumnIndex(draggedApp);
                 int draggedY = GridPane.getRowIndex(draggedApp);
@@ -443,6 +444,7 @@ public class Control_Interface implements Initializable {
                                     if(cible.getChildren().toString().equals(j.getid())){
                                         if(j.gettype().equals("noire")){
                                             cible.getChildren().clear();
+                                            ennemi = true;
                                         }
                                         if(j.gettype().equals("blanc")){
                                             if((j.getnom().equals("Tour") && i.getnom().equals("Roi")) || (i.getnom().equals("Tour") && j.getnom().equals("Roi")) ){
@@ -458,8 +460,8 @@ public class Control_Interface implements Initializable {
                                              }
                                          }
                                      }
-                                    System.out.println(i.deplacementValide(draggedX,draggedY, droppedX, droppedY) + " " + deplacement_ok );
-                                    if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY))
+                                    System.out.println(i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi) + " " + deplacement_ok );
+                                    if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi))
                                         deplacement_ok = false;
                                      System.out.println(deplacement_ok );   
                                     
@@ -502,7 +504,7 @@ public class Control_Interface implements Initializable {
                                     }
                                   }
                                    
-                                    if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY))
+                                    if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi))
                                         deplacement_ok = false;
                                      
                                   if(deplacement_ok == true){
