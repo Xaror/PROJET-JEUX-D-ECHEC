@@ -63,6 +63,8 @@ public class Control_Interface implements Initializable {
     private Label tmpW;
     @FXML
     private Label tmpB;
+     @FXML
+    private Label Tour;
     @FXML
     private ListView listCpW;
     @FXML
@@ -131,7 +133,7 @@ public class Control_Interface implements Initializable {
             
     
         private void charge_pieces(){           
-            grille.setGridLinesVisible(true);
+            //+grille.setGridLinesVisible(true);
             final int appsPerRow = 8;
             
             for (int i = 0; i < 63; i++) {
@@ -432,16 +434,20 @@ public class Control_Interface implements Initializable {
                               
                               if( tour_blanc == true)
                               {
-                                  String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
-                                  olb.add(phrase);
-                                  System.out.println(" move blanc " );
-                                  GridPane.setColumnIndex(draggedApp, droppedX);
-                                  GridPane.setRowIndex(draggedApp, droppedY);
-                                  GridPane.setColumnIndex(app, draggedX);
-                                  GridPane.setRowIndex(app, draggedY);
-                                  tour_blanc=false;
-                                  //ChronoW.stop();
-                                  //ChronoB.play();
+                                    String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
+                                    olb.add(phrase);
+                                    System.out.println(" move blanc " );
+                                    GridPane.setColumnIndex(draggedApp, droppedX);
+                                    GridPane.setRowIndex(draggedApp, droppedY);
+                                    GridPane.setColumnIndex(app, draggedX);
+                                    GridPane.setRowIndex(app, draggedY);
+                                    tour_blanc=false;
+                                    System.out.println(ChronoW.getTime());
+                                    
+                                  
+                                  Tour.setText("Tour noir !");
+                                  ChronoW.stop();
+                                  ChronoB.play();
                               }
                          }else{
                               if( tour_blanc == false)
@@ -454,8 +460,10 @@ public class Control_Interface implements Initializable {
                                   GridPane.setColumnIndex(app, draggedX);
                                   GridPane.setRowIndex(app, draggedY);
                                   tour_blanc=true;
-                                 // ChronoB.stop();
-                                  //ChronoW.play();
+                                  Tour.setText("Tour blanc !");
+                                  System.out.println(ChronoB.getTime());
+                                  ChronoB.stop();
+                                  ChronoW.play();
                                 }
                          }
                      }
@@ -479,32 +487,33 @@ public class Control_Interface implements Initializable {
         private void btnStartClick(ActionEvent event) {
             tour_blanc = true;
             charge_pieces();
-            Go_Chrono();
-            //ChronoW.play();
+            Tour.setText("Tour blanc !");
+           // Go_Chrono();
+           
+            ChronoW.play();
             }
         @FXML
         private void btnAbandonClick(ActionEvent event) {
             
-            Stop_Chrono();
+           // Stop_Chrono();
             //ChronoW.play();
             }
 
-
-                // Fonctions pour le chronometre
+        
+        // Fonctions pour le chronometre
         static long chrono = 0 ;
-
+        
         // Lancement du chrono
         static void Go_Chrono() {
         chrono = java.lang.System.currentTimeMillis() ;
         }
-
+        
         // Arret du chrono
-        static void Stop_Chrono() {
+        static long Stop_Chrono() {
         long chrono2 = java.lang.System.currentTimeMillis() ;
         long temps = chrono2 - chrono ;
-        System.out.println("Temps ecoule = " + temps + " ms") ;
+        return temps;
         } 
-
 
 
         ObservableList<String> oln=FXCollections.observableArrayList();
@@ -515,9 +524,9 @@ public class Control_Interface implements Initializable {
                 Piece = new ArrayList<Piece>();
                 ChronoW = new Chronometre(tmpW);
                 ChronoB = new Chronometre(tmpB);
-                
-               //ChronoW.setLbl(tmpW);
-               // ChronoB.setLbl(tmpB);
+                Go_Chrono();
+                ChronoW.setLbl(tmpW);
+                ChronoB.setLbl(tmpB);
                 listCpB.setItems(oln);
                 listCpW.setItems(olb);
                 

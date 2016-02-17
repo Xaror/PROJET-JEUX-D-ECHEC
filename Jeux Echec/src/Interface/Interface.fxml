@@ -10,7 +10,10 @@
 
 <AnchorPane id="AnchorPane" fx:id="closeButtonAction" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1270.0" style="-fx-background-image: url('Interface/font/bg.png');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.Control_Interface">
    <children>
-      <Button fx:id="closeButton" layoutX="1056.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="155.0" text="Fermer" />
+      <Button fx:id="closeButton" layoutX="1056.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="155.0" text="Fermer">
+         <font>
+            <Font name="Comic Sans MS Bold Italic" size="18.0" />
+         </font></Button>
       <ImageView fx:id="plateau" fitHeight="521.0" fitWidth="501.0" layoutX="100.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@font/echiquier.jpg" />
@@ -46,7 +49,10 @@
          </effect>            
                 
       </Button>
-      <Button fx:id="Abandon" layoutX="957.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnAbandonClick" prefHeight="42.0" prefWidth="113.0" style="-fx-background-color: red;" text="Abandonner" textFill="WHITE" />
+      <Button fx:id="Abandon" layoutX="957.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnAbandonClick" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: red;" text="Abandonner" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold Italic" size="18.0" />
+         </font></Button>
       <Button fx:id="btnMoteurClick" layoutX="969.0" layoutY="144.0" mnemonicParsing="false" opacity="0.8" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: #550055;" text="Noir : Stockfish 6" textFill="#a1b7b9">
          <effect>
             <DropShadow color="#9102a4" height="101.06" radius="24.765" spread="0.06" width="0.0" />
@@ -83,6 +89,11 @@
          </cursor>
          
       </GridPane>
+      <Label fx:id="Tour" alignment="CENTER" contentDisplay="CENTER" layoutX="100.0" layoutY="107.0" opacity="0.56" prefHeight="64.0" prefWidth="501.0" style="-fx-background-color: Cyan;" textAlignment="CENTER">
+         <font>
+            <Font name="Comic Sans MS Bold" size="24.0" />
+         </font>
+      </Label>
       
    </children>
 </AnchorPane>

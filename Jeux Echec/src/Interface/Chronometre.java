@@ -21,20 +21,20 @@ public class Chronometre extends HBox{
 
     private Label Lbl;
     private long timeCounter;
-    private Timeline timeline;
+    private Timeline timeline = new Timeline();
 
-    
+   
     public Chronometre(Label lb){
         Lbl=lb;
     }
-    /*public Chronometre(){
+    public Chronometre(){
 	this(Duration.millis(0));
-    }*/
+    }
   
     public Chronometre(Duration duration){		
 	timeCounter = (long)duration.toMillis();
 	updateLabels(timeCounter);
-        getChildren().addAll(Lbl);
+        getChildren().add(Lbl);
 	timeline = new Timeline(new KeyFrame(Duration.millis(1), new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent arg0){
@@ -65,6 +65,7 @@ public class Chronometre extends HBox{
     }
 
     public void play(){
+        //setTime(time);
         timeline.play();
     }
 
