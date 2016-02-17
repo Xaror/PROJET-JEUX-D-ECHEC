@@ -5,6 +5,8 @@
  */
 package Interface;
 
+import JeuxEchecs.Deplacement;
+import JeuxEchecs.Position;
 import javafx.scene.image.ImageView;
 
 /**
@@ -42,5 +44,72 @@ public class Piece {
     public void settype( String type){
         this.type=type;
     }
-            
+    public boolean deplacementValide(int XD,int YD,int XF,int YF ){
+	Position depart = new Position(XD , YD);
+        Position arrive = new Position(XF , YF);
+        Deplacement dep = new Deplacement(depart , arrive);
+        boolean status = false;
+        switch (getnom())
+                {                  
+                  case "Tour":
+                    status = deplacementtour(dep);
+                    break;
+                  case "Cavalier":
+                    status = deplacementcavalier(dep);  
+                    break;
+                  case "Fou":
+                    status = deplacementfou(dep);  
+                    break;
+                  case "Reine":
+                    status = deplacementreine(dep);  
+                    break;
+                  case "Roi":
+                    status = deplacementroi(dep);  
+                    break;
+                  case "Pion":
+                    status = deplacementpion(dep);  
+                    break;
+                }
+            				
+	return status; 
+    }       
+    public boolean deplacementroi(Deplacement deplacement){
+        return Math.abs(deplacement.getDeplacementX()) * Math.abs(deplacement.getDeplacementY()) <= 1
+            && Math.abs(deplacement.getDeplacementX()) - Math.abs(deplacement.getDeplacementY()) <= 1
+            && Math.abs(deplacement.getDeplacementX()) - Math.abs(deplacement.getDeplacementY()) >= -1
+            && !deplacement.deplacementNul();
+    }
+    public boolean deplacementpion(Deplacement dep){
+	if(dep.getDeplacementX() == 0){
+            if (this.gettype().equals("noire")){ 
+                return dep.getDeplacementY() <= (dep.getDepart().getLigne() == 1 ? 2 : 1) && dep.getDeplacementY() > 0;
+            }
+            else{
+                return dep.getDeplacementY() >= (dep.getDepart().getLigne() == 6 ? -2 : -1) && dep.getDeplacementY() < 0;
+                }
+        }
+        if(dep.getDeplacementX() == 1 || dep.getDeplacementX() == -1){
+            if (this.gettype().equals("noire")){ 
+                return dep.getDeplacementY() <= (dep.getDepart().getLigne() == 1 ? 1 : 1) && dep.getDeplacementY() > 0;
+            }
+            else{
+                return dep.getDeplacementY() >= (dep.getDepart().getLigne() == 6 ? -1 : -1) && dep.getDeplacementY() < 0;
+                }
+        }
+        return false;				
+	 
+    }
+    public boolean deplacementcavalier(Deplacement deplacement){
+        return (Math.abs(deplacement.getDeplacementX() / deplacement.getDeplacementY())) == 2 | (Math.abs(deplacement.getDeplacementX() / deplacement.getDeplacementY())) == .5;
+    }
+     public boolean deplacementfou(Deplacement deplacement){
+		return Math.abs(deplacement.getDeplacementX()) - Math.abs(deplacement.getDeplacementY()) == 0 && !deplacement.deplacementNul();	
+    } 
+     
+     public boolean deplacementtour(Deplacement deplacement){
+        return deplacement.getDeplacementX() * deplacement.getDeplacementY() == 0 && !deplacement.deplacementNul();
+    } 
+      public boolean deplacementreine(Deplacement deplacement){
+	return (Math.abs(deplacement.getDeplacementX()) - Math.abs(deplacement.getDeplacementY()) == 0 | deplacement.getDeplacementX() * deplacement.getDeplacementY() == 0) && !deplacement.deplacementNul();
+    } 
 }

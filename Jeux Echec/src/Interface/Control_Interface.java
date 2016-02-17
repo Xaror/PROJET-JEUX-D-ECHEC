@@ -429,7 +429,7 @@ public class Control_Interface implements Initializable {
                     break;
                 }
                 //draggedApp.set
-                System.out.println(" tour debut" + tour_blanc);
+               
                 for(Piece i:Piece){
                       
                      if(draggedApp.getChildren().toString().equals(i.getid()))
@@ -443,17 +443,14 @@ public class Control_Interface implements Initializable {
                                     if(cible.getChildren().toString().equals(j.getid())){
                                         if(j.gettype().equals("noire")){
                                             cible.getChildren().clear();
-                                            System.out.println("ok");
-                                            
                                         }
                                         if(j.gettype().equals("blanc")){
                                             if((j.getnom().equals("Tour") && i.getnom().equals("Roi")) || (i.getnom().equals("Tour") && j.getnom().equals("Roi")) ){
                                                 if(rock_b_possible == true)
-                                                {
-                                                    
-                                                    System.out.println(j.getnom() + " " + i.getnom());
+                                                {    
+                                                   
                                                     rock_b_possible = false;
-                                                    System.out.println(rock_b_possible);
+                                                    
                                                 }else{
                                                     deplacement_ok = false;
                                                 }
@@ -461,6 +458,10 @@ public class Control_Interface implements Initializable {
                                              }
                                          }
                                      }
+                                    System.out.println(i.deplacementValide(draggedX,draggedY, droppedX, droppedY) + " " + deplacement_ok );
+                                    if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY))
+                                        deplacement_ok = false;
+                                     System.out.println(deplacement_ok );   
                                     
                                      if(deplacement_ok == true){
                                             String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
@@ -470,7 +471,7 @@ public class Control_Interface implements Initializable {
                                             GridPane.setColumnIndex(app, draggedX);
                                             GridPane.setRowIndex(app, draggedY);
                                             tour_blanc=false;
-                                            Tour.setText("Tour noir !");
+                                            Tour.setText("Tour des noir !");
                                             ChronoW.stop();
                                             ChronoB.play();
                                      }
@@ -484,15 +485,15 @@ public class Control_Interface implements Initializable {
                                     if(cible.getChildren().toString().equals(j.getid())){
                                         if(j.gettype().equals("blanc")){
                                             cible.getChildren().clear();
-                                            System.out.println("ok");
+                                            
                                         }
                                         if(j.gettype().equals("noire")){
                                             if(j.getnom().equals("Tour") && i.getnom().equals("Roi") || i.getnom().equals("Tour") && j.getnom().equals("Roi") ){
                                                 if(rock_n_possible == true)
                                                 {
-                                                    System.out.println(rock_n_possible);
+                                                    
                                                     rock_n_possible = false;
-                                                    System.out.println(rock_n_possible);
+                                                   
                                                 }else{
                                                     deplacement_ok = false;
                                                 }
@@ -500,17 +501,19 @@ public class Control_Interface implements Initializable {
                                         }
                                     }
                                   }
+                                   
+                                    if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY))
+                                        deplacement_ok = false;
+                                     
                                   if(deplacement_ok == true){
                                         String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
                                         oln.add(phrase);
-                                        System.out.println(" move noir " );
                                         GridPane.setColumnIndex(draggedApp, droppedX);
                                         GridPane.setRowIndex(draggedApp, droppedY);
                                         GridPane.setColumnIndex(app, draggedX);
                                         GridPane.setRowIndex(app, draggedY);
+                                         Tour.setText("Tour des blanc !");
                                         tour_blanc=true;
-                                        System.out.println(" timer noir " + ChronoW.getTime());
-                                        System.out.println(ChronoB.getTime());
                                         ChronoB.stop();
                                         ChronoW.play();
                                   }
@@ -519,7 +522,7 @@ public class Control_Interface implements Initializable {
                          }
                      }
                      
-                 }System.out.println(" tour fin " + tour_blanc);
+                 }
              
                 
               }
@@ -559,6 +562,7 @@ public class Control_Interface implements Initializable {
             listCpB.getItems().clear();
             tmpW.setText("00:00:000");
             tmpB.setText("00:00:000");
+            Tour.setText("");
             StartGame.setDisable(false);
             }
 
