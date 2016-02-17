@@ -442,7 +442,7 @@ public class Control_Interface implements Initializable {
                                     GridPane.setColumnIndex(app, draggedX);
                                     GridPane.setRowIndex(app, draggedY);
                                     tour_blanc=false;
-                                    System.out.println(" timer blanc " + ChronoW.getTime());
+                                 
                                     
                                   
                                   Tour.setText("Tour des noirs !");
@@ -460,8 +460,6 @@ public class Control_Interface implements Initializable {
                                   GridPane.setColumnIndex(app, draggedX);
                                   GridPane.setRowIndex(app, draggedY);
                                   tour_blanc=true;
-                                  System.out.println(" timer noir " + ChronoW.getTime());
-                                  System.out.println(ChronoB.getTime());
                                   ChronoB.stop();
                                   ChronoW.play();
                                 }
