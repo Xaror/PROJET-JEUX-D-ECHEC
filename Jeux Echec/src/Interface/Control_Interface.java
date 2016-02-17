@@ -442,7 +442,7 @@ public class Control_Interface implements Initializable {
                                     GridPane.setColumnIndex(app, draggedX);
                                     GridPane.setRowIndex(app, draggedY);
                                     tour_blanc=false;
-                                    System.out.println(" timer " + ChronoW.getTime());
+                                    System.out.println(" timer blanc " + ChronoW.getTime());
                                     
                                   
                                   Tour.setText("Tour noir !");
@@ -460,7 +460,7 @@ public class Control_Interface implements Initializable {
                                   GridPane.setColumnIndex(app, draggedX);
                                   GridPane.setRowIndex(app, draggedY);
                                   tour_blanc=true;
-                                  Tour.setText("Tour blanc !");
+                                  System.out.println(" timer noir " + ChronoW.getTime());
                                   System.out.println(ChronoB.getTime());
                                   ChronoB.stop();
                                   ChronoW.play();
@@ -493,31 +493,26 @@ public class Control_Interface implements Initializable {
             ChronoB = new Chronometre(tmpB);
             ChronoW.setLbl(tmpW);
             ChronoB.setLbl(tmpB);
-           
             ChronoW.play();
+            StartGame.setDisable(true);
             }
         @FXML
         private void btnAbandonClick(ActionEvent event) {
-            
-           // Stop_Chrono();
-            //ChronoW.play();
+            tour_blanc = true;
+            ChronoW.stop();
+            ChronoW.reset();
+            ChronoB.stop();
+            ChronoB.reset();
+            charge_pieces();
+            listCpW.getItems().clear();
+            listCpB.getItems().clear();
+            tmpW.setText("00:00:000");
+            tmpB.setText("00:00:000");
+            StartGame.setDisable(false);
             }
 
         
-        // Fonctions pour le chronometre
-     /*   static long chrono = 0 ;
-        
-        // Lancement du chrono
-        static void Go_Chrono() {
-        chrono = java.lang.System.currentTimeMillis() ;
-        }
-        
-        // Arret du chrono
-        static long Stop_Chrono() {
-        long chrono2 = java.lang.System.currentTimeMillis() ;
-        long temps = chrono2 - chrono ;
-        return temps;
-        } */
+  
 
 
         ObservableList<String> oln=FXCollections.observableArrayList();

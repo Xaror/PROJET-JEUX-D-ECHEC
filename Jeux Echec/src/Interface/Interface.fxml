@@ -19,12 +19,12 @@
             <Image url="@font/echiquier.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="tmpB" alignment="CENTER" layoutX="947.0" layoutY="214.0" opacity="0.63" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: Black;" text="00.00.00" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="tmpB" alignment="CENTER" layoutX="947.0" layoutY="214.0" opacity="0.63" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: Black;" text="00:00:000" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="tmpW" alignment="CENTER" layoutX="727.0" layoutY="214.0" opacity="0.56" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: White;" text="00.00.00" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="tmpW" alignment="CENTER" layoutX="727.0" layoutY="214.0" opacity="0.56" prefHeight="64.0" prefWidth="219.0" style="-fx-background-color: White;" text="00:00:000" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>

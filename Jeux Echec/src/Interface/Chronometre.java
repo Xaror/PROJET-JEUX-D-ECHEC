@@ -31,22 +31,7 @@ public class Chronometre{
     public Chronometre(Label lb){
         Lbl=lb;
     }
-    public Chronometre(){
-	this(Duration.millis(0));
-    }
-  
-    public Chronometre(Duration duration){		
-	timeCounter = (long)duration.toMillis();
-	updateLabels(timeCounter);
-        //getChildren().add(Lbl);
-	timeline = new Timeline(new KeyFrame(Duration.millis(1), new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent arg0){
-		updateLabels(timeCounter++);				
-        }}));
-        timeline.setCycleCount(Timeline.INDEFINITE);
-    }
-	
+    	
     public long getTime(){
         return timeCounter;
     }
@@ -69,21 +54,19 @@ public class Chronometre{
     }
 
     public void play(){
-        if(first == true){
-          chrono =  java.lang.System.currentTimeMillis() ;
-          first = false;
-        }
-        
+       
+        timeline = new Timeline(new KeyFrame(Duration.millis(1), new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent arg0){
+		updateLabels(timeCounter++);				
+        }}));
+        timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
 
     public void stop(){
         timeline.stop();
-        long chrono2 = java.lang.System.currentTimeMillis() ;
-        temps = chrono2 - chrono ;
-        temps_total = temps + getTime();
-        chrono = java.lang.System.currentTimeMillis() ;
-        setTime(temps_total);
+        
     }
 	
     public void reset(){
@@ -98,7 +81,7 @@ public class Chronometre{
         String sMil = millisecondes<10?("00"+millisecondes):millisecondes<100?("0"+millisecondes):(""+millisecondes);
         String sSec = secondes<10?("0"+secondes):(""+secondes);
         String sMin = minutes<10?("0"+minutes):(""+minutes);
-        Lbl.setText(sMin + " : " + sSec + " : " + sMil);
+        Lbl.setText(sMin + ":" + sSec + ":" + sMil);
         
     }
     
