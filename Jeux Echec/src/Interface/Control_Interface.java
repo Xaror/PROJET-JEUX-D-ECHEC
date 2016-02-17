@@ -46,7 +46,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import JeuxEchecs.Echiquier;
-
+import static jdk.nashorn.internal.runtime.Context.DEBUG;
+import ucichess.UCIChess;
+import ucichess.ChessBoard;
 /**
  *
  * @author Bloody
@@ -649,7 +651,7 @@ public class Control_Interface implements Initializable {
                 listCpW.setItems(olb);
                 
                  //charger le moteur si possible
-               /* btnMoteur.setText("MOTEUR : Aucun");
+               
                 String engine=read_Engine();
                 //si aucun moteur alors seule solution le charger
                 if (!isEngineUP){
@@ -659,7 +661,7 @@ public class Control_Interface implements Initializable {
                 else
                 {
                      startEngine(engine);
-                }*/
+                }
             }     
   
    
@@ -707,16 +709,16 @@ public class Control_Interface implements Initializable {
      * lance le moteur d'échec...
      * @param path
      */
-    /**
+    /****/
     private void startEngine(String path){
         uci=new UCIChess(path);
         uci.get_UciOk(DEBUG);
-        btnMoteur.setText("Moteur : "+uci.getEngineName());
-        init_board();
-        affiche_Board();
+        //btnMoteur.setText("Moteur : "+uci.getEngineName());
+        //init_board();
+        //affiche_Board();
         uci.send_uciNewGame();
     }
-**/
+
 
    
 }
