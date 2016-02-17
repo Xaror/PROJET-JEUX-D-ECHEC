@@ -78,6 +78,8 @@ public class Control_Interface implements Initializable {
     /**/
     private Chronometre ChronoW ;
     private Chronometre ChronoB;
+    private boolean rock_b_possible = true;
+    private boolean rock_n_possible = true;
    
     
     
@@ -361,6 +363,8 @@ public class Control_Interface implements Initializable {
 
         public void handle(DragEvent event) {
                 Pane draggedApp = (Pane) event.getGestureSource();
+                Pane cible = (Pane) event.getGestureTarget();
+                boolean deplacement_ok = true;
                 // switch panes:
                 int draggedX = GridPane.getColumnIndex(draggedApp);
                 int draggedY = GridPane.getRowIndex(draggedApp);
@@ -431,39 +435,86 @@ public class Control_Interface implements Initializable {
                      if(draggedApp.getChildren().toString().equals(i.getid()))
                      {
                          if(i.gettype().equals("blanc") ){
-                              
+                              // tour blanc
                               if( tour_blanc == true)
                               {
-                                    String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
-                                    olb.add(phrase);
                                     System.out.println(" move blanc " );
-                                    GridPane.setColumnIndex(draggedApp, droppedX);
-                                    GridPane.setRowIndex(draggedApp, droppedY);
-                                    GridPane.setColumnIndex(app, draggedX);
-                                    GridPane.setRowIndex(app, draggedY);
-                                    tour_blanc=false;
-                                    System.out.println(" timer blanc " + ChronoW.getTime());
+                                    for(Piece j:Piece){
+                                    if(cible.getChildren().toString().equals(j.getid())){
+                                        if(j.gettype().equals("noire")){
+                                            cible.getChildren().clear();
+                                            System.out.println("ok");
+                                            
+                                        }
+                                        if(j.gettype().equals("blanc")){
+                                            if((j.getnom().equals("Tour") && i.getnom().equals("Roi")) || (i.getnom().equals("Tour") && j.getnom().equals("Roi")) ){
+                                                if(rock_b_possible == true)
+                                                {
+                                                    
+                                                    System.out.println(j.getnom() + " " + i.getnom());
+                                                    rock_b_possible = false;
+                                                    System.out.println(rock_b_possible);
+                                                }else{
+                                                    deplacement_ok = false;
+                                                }
+                                             }else deplacement_ok = false;
+                                             }
+                                         }
+                                     }
                                     
-                                  
-                                  Tour.setText("Tour noir !");
-                                  ChronoW.stop();
-                                  ChronoB.play();
+                                     if(deplacement_ok == true){
+                                            String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
+                                            olb.add(phrase);
+                                            GridPane.setColumnIndex(draggedApp, droppedX);
+                                            GridPane.setRowIndex(draggedApp, droppedY);
+                                            GridPane.setColumnIndex(app, draggedX);
+                                            GridPane.setRowIndex(app, draggedY);
+                                            tour_blanc=false;
+                                            Tour.setText("Tour noir !");
+                                            ChronoW.stop();
+                                            ChronoB.play();
+                                     }
                               }
                          }else{
+                             // tour noir
                               if( tour_blanc == false)
                                 {
-                                  String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
-                                  oln.add(phrase);
-                                  System.out.println(" move noir " );
-                                  GridPane.setColumnIndex(draggedApp, droppedX);
-                                  GridPane.setRowIndex(draggedApp, droppedY);
-                                  GridPane.setColumnIndex(app, draggedX);
-                                  GridPane.setRowIndex(app, draggedY);
-                                  tour_blanc=true;
-                                  System.out.println(" timer noir " + ChronoW.getTime());
-                                  System.out.println(ChronoB.getTime());
-                                  ChronoB.stop();
-                                  ChronoW.play();
+                                  
+                                  for(Piece j:Piece){
+                                    if(cible.getChildren().toString().equals(j.getid())){
+                                        if(j.gettype().equals("blanc")){
+                                            cible.getChildren().clear();
+                                            System.out.println("ok");
+                                        }
+                                        if(j.gettype().equals("noire")){
+                                            if(j.getnom().equals("Tour") && i.getnom().equals("Roi") || i.getnom().equals("Tour") && j.getnom().equals("Roi") ){
+                                                if(rock_n_possible == true)
+                                                {
+                                                    System.out.println(rock_n_possible);
+                                                    rock_n_possible = false;
+                                                    System.out.println(rock_n_possible);
+                                                }else{
+                                                    deplacement_ok = false;
+                                                }
+                                             }else deplacement_ok = false;
+                                        }
+                                    }
+                                  }
+                                  if(deplacement_ok == true){
+                                        String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
+                                        oln.add(phrase);
+                                        System.out.println(" move noir " );
+                                        GridPane.setColumnIndex(draggedApp, droppedX);
+                                        GridPane.setRowIndex(draggedApp, droppedY);
+                                        GridPane.setColumnIndex(app, draggedX);
+                                        GridPane.setRowIndex(app, draggedY);
+                                        tour_blanc=true;
+                                        System.out.println(" timer noir " + ChronoW.getTime());
+                                        System.out.println(ChronoB.getTime());
+                                        ChronoB.stop();
+                                        ChronoW.play();
+                                  }
+                                  
                                 }
                          }
                      }
@@ -503,7 +554,7 @@ public class Control_Interface implements Initializable {
             ChronoW.reset();
             ChronoB.stop();
             ChronoB.reset();
-            charge_pieces();
+            vide_grille();
             listCpW.getItems().clear();
             listCpB.getItems().clear();
             tmpW.setText("00:00:000");
@@ -512,7 +563,9 @@ public class Control_Interface implements Initializable {
             }
 
         
-  
+        private void vide_grille(){
+            grille.getChildren().clear();
+        }
 
 
         ObservableList<String> oln=FXCollections.observableArrayList();
