@@ -382,39 +382,6 @@ public class Control_Interface implements Initializable {
             app.setOnDragDropped(new EventHandler<DragEvent>() {
 
                 
-                
-        public String nb_to_char(int a){
-           String XD = "";
-            switch (a)
-                {
-
-                  case 0:
-                    XD= "A";
-                    break;  
-                  case 1:
-                    XD="B";
-                    break; 
-                  case 2:
-                    XD="C";
-                    break; 
-                  case 3:
-                    XD="D";
-                    break; 
-                  case 4:
-                    XD="E";
-                    break; 
-                  case 5:
-                    XD="F";
-                    break;
-                  case 6:
-                    XD="G";
-                    break;
-                  case 7:
-                    XD="H";
-                    break;
-                }
-            return XD;
-        }  
         
         
        public boolean cible_roi(Piece j,Pane cible,String couleur){
@@ -513,7 +480,73 @@ public class Control_Interface implements Initializable {
             GridPane.setRowIndex(draggedApp, YF);
             GridPane.setColumnIndex(app, XD);
             GridPane.setRowIndex(app, YD);
-        }       
+        }
+        public String inverse_coor(int a){
+           String i = "";
+            switch (a)
+                {
+
+                  case 0:
+                    i="8";
+                    break;  
+                  case 1:
+                    i="7";
+                    break; 
+                  case 2:
+                    i="6";
+                    break; 
+                  case 3:
+                    i="5";
+                    break; 
+                  case 4:
+                    i="4";
+                    break; 
+                  case 5:
+                    i="3";
+                    break;
+                  case 6:
+                    i="2";
+                    break;
+                  case 7:
+                    i="1";
+                    break;
+                }
+            return i;
+        }
+                
+        public String nb_to_char(int a){
+           String XD = "";
+            switch (a)
+                {
+
+                  case 0:
+                    XD= "A";
+                    break;  
+                  case 1:
+                    XD="B";
+                    break; 
+                  case 2:
+                    XD="C";
+                    break; 
+                  case 3:
+                    XD="D";
+                    break; 
+                  case 4:
+                    XD="E";
+                    break; 
+                  case 5:
+                    XD="F";
+                    break;
+                  case 6:
+                    XD="G";
+                    break;
+                  case 7:
+                    XD="H";
+                    break;
+                }
+            return XD;
+        }  
+        
         public void handle(DragEvent event) {
                 Pane draggedApp = (Pane) event.getGestureSource();
                 Pane cible = (Pane) event.getGestureTarget();
@@ -526,7 +559,8 @@ public class Control_Interface implements Initializable {
                 int droppedY = GridPane.getRowIndex(app);
                 String XD = nb_to_char(draggedX);
                 String XF = nb_to_char(droppedX);
-                
+                String YD = inverse_coor(draggedY);
+                String YF = inverse_coor(droppedY);
                 
                 //draggedApp.set
                
@@ -543,7 +577,7 @@ public class Control_Interface implements Initializable {
                                        
                                     
                                      if(deplacement_ok == true){
-                                            String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
+                                            String phrase =  i.getnom() + " " + XD + " " + YD + " - " + XF + " " + YF ;
                                             olb.add(phrase);
                                             move(draggedApp,draggedX,draggedY,droppedX,droppedY);
                                             tour_blanc=false;
@@ -562,7 +596,7 @@ public class Control_Interface implements Initializable {
                                     
                                      
                                     if(deplacement_ok == true){
-                                        String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
+                                        String phrase =  i.getnom() + " " + XD + " " + YD + " - " + XF + " " + YF ;
                                         oln.add(phrase);
                                         move(draggedApp,draggedX,draggedY,droppedX,droppedY);
                                         Tour.setText("Tour des blancs !");
@@ -604,11 +638,11 @@ public class Control_Interface implements Initializable {
             StartGame.setDisable(true);
             /*sleep(1000);
                 party();
-            }*/
+            }
             
             make_move("a1c5","noire");
             make_move("e1e4","noire");
-            make_move("e8d4","noire");
+            make_move("e8d4","noire");*/
         }
         @FXML
         private void btnAbandonClick(ActionEvent event) {
@@ -679,7 +713,8 @@ public class Control_Interface implements Initializable {
              String fenBlack=ChessBoard.moveFromFEN(fenWhite, blackMove);
              ChessBoard.show_chessboard();
         }*/
-        public void party() throws InterruptedException{
+        @FXML
+        private void party(ActionEvent event) throws InterruptedException{
             
         long i=1000;    
         UCIChess engine1=new UCIChess("./src/Protector_1_6_0/bin/Protector 1.6.0 x64.exe");

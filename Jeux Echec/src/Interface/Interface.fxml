@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="closeButtonAction" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="1270.0" style="-fx-background-image: url('Interface/font/bg.png');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Interface.Control_Interface">
    <children>
-      <Button fx:id="closeButton" layoutX="1056.0" layoutY="622.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="155.0" text="Fermer">
+      <Button fx:id="closeButton" layoutX="1011.0" layoutY="603.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="155.0" text="Fermer">
          <font>
             <Font name="Comic Sans MS Bold Italic" size="18.0" />
          </font></Button>
