@@ -58,6 +58,7 @@ public class Piece {
         Position arrive = new Position(XF , YF);
         Deplacement dep = new Deplacement(depart , arrive);
         boolean status = false;
+        
         switch (getnom())
                 {                  
                   case "Tour":
@@ -108,8 +109,22 @@ public class Piece {
         return false;				
 	 
     }
-    public boolean deplacementcavalier(Deplacement deplacement){
-        return (Math.abs(deplacement.getDeplacementX() / deplacement.getDeplacementY())) == 2 | (Math.abs(deplacement.getDeplacementX() / deplacement.getDeplacementY())) == .5;
+    public boolean deplacementcavalier(Deplacement dep){
+        //return (Math.abs(deplacement.getDeplacementX() / deplacement.getDeplacementY())) == 2 | (Math.abs(deplacement.getDeplacementX() / deplacement.getDeplacementY())) == .5;
+        if((dep.getDepart().getLigne() - dep.getArrivee().getLigne()== 2 && dep.getDepart().getColonne() - dep.getArrivee().getColonne()== 1) ||
+           (dep.getDepart().getLigne() - dep.getArrivee().getLigne()== 2 && dep.getDepart().getColonne() - dep.getArrivee().getColonne()== -1) ||
+           (dep.getDepart().getLigne() - dep.getArrivee().getLigne()== -2 && dep.getDepart().getColonne() - dep.getArrivee().getColonne()== 1) ||
+           (dep.getDepart().getLigne() - dep.getArrivee().getLigne()== -2 && dep.getDepart().getColonne() - dep.getArrivee().getColonne()== -1)||
+           (dep.getDepart().getLigne() - dep.getArrivee().getLigne()== 1 && dep.getDepart().getColonne() - dep.getArrivee().getColonne()== 2) ||
+           (dep.getDepart().getLigne() - dep.getArrivee().getLigne()== 1 && dep.getDepart().getColonne() - dep.getArrivee().getColonne()== -2) ||
+           (dep.getDepart().getLigne() - dep.getArrivee().getLigne()== -1 && dep.getDepart().getColonne() - dep.getArrivee().getColonne()== 2) ||
+           (dep.getDepart().getLigne() - dep.getArrivee().getLigne()== -1 && dep.getDepart().getColonne() - dep.getArrivee().getColonne()== -2) 
+            )
+        {
+            return true;
+        }
+        else 
+            return false;
     }
      public boolean deplacementfou(Deplacement deplacement){
 		return Math.abs(deplacement.getDeplacementX()) - Math.abs(deplacement.getDeplacementY()) == 0 && !deplacement.deplacementNul();	

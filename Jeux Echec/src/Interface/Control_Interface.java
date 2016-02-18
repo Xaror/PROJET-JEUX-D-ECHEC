@@ -85,7 +85,8 @@ public class Control_Interface implements Initializable {
     private Chronometre ChronoB;
     private boolean rock_b_possible = true;
     private boolean rock_n_possible = true;
-   
+    UCIChess uci;
+
     
     
     
@@ -366,23 +367,15 @@ public class Control_Interface implements Initializable {
             });
             app.setOnDragDropped(new EventHandler<DragEvent>() {
 
-        public void handle(DragEvent event) {
-                Pane draggedApp = (Pane) event.getGestureSource();
-                Pane cible = (Pane) event.getGestureTarget();
-                boolean deplacement_ok = true;
-                boolean ennemi = false;
-                // switch panes:
-                int draggedX = GridPane.getColumnIndex(draggedApp);
-                int draggedY = GridPane.getRowIndex(draggedApp);
-                int droppedX = GridPane.getColumnIndex(app);
-                int droppedY = GridPane.getRowIndex(app);
-                String XD = "";
-                String XF = "";
-                switch (draggedX)
+                
+                
+        public String nb_to_char(int a){
+           String XD = "";
+            switch (a)
                 {
 
                   case 0:
-                    XD="A";
+                    XD= "A";
                     break;  
                   case 1:
                     XD="B";
@@ -406,34 +399,116 @@ public class Control_Interface implements Initializable {
                     XD="H";
                     break;
                 }
-                switch (droppedX)
-                {
+            return XD;
+        }  
+        
+        
+       public boolean cible_roi(Piece j,Pane cible,String couleur){
+           if(j.getnom().equals("Roi")){
+                                cible.getChildren().clear();                                                
+                                Alert alert = new Alert(AlertType.CONFIRMATION);
+                                alert.setTitle("Echec et Mate");
+                                alert.setHeaderText("Les "+ couleur +"s on gagné !!!");
+                                alert.setContentText("Voulez vous recommencer une partie ou quiiter le jeu?");
+                                Optional<ButtonType> result = alert.showAndWait();
+                                if (result.get() == ButtonType.OK){
+                                    
+                                    restart();
+                                    return  false;
+                                    
+                                } else {
+                                    Platform.exit();
+                                }              
+                            }else cible.getChildren().clear();
+           return  false;
+       }
+        public boolean test_move_valide(String couleur_inverse,String couleur,Pane cible,Piece i,int draggedX,int draggedY,int droppedX,int droppedY, boolean rock){
+            boolean deplacement_ok = true;
+            boolean ennemi = false;
+                
+            for(Piece j:Piece){
+                
+                   
 
-                  case 0:
-                    XF="A";
-                    break;  
-                  case 1:
-                    XF="B";
-                    break; 
-                  case 2:
-                    XF="C";
-                    break; 
-                  case 3:
-                    XF="D";
-                    break; 
-                  case 4:
-                    XF="E";
-                    break; 
-                  case 5:
-                    XF="F";
-                    break;
-                  case 6:
-                    XF="G";
-                    break;
-                  case 7:
-                    XF="H";
-                    break;
+                // test si la case cible contient une piece 
+               // System.out.println(" passe " + cible.getChildren().toString() + " " +j.getid());
+                if(cible.getChildren().toString().equals(j.getid())){
+                    System.out.println(" passe1 " + cible.getChildren().toString());
+                    // test si la case contient une piece ennemi 
+                    if(j.gettype().equals(couleur_inverse)){
+                        //ennemi detecte
+                        System.out.println(ennemi);
+                        ennemi = true;
+                        System.out.println(ennemi);
+                        //test si la piece source est un pion
+                        if(i.getnom().equals("Pion") ){
+                            System.out.println(" passe2 ");
+                            // test si le deplaccement n'est en diagonal pas de prise de piece mouvement impossible
+                            if((draggedX-droppedX==1 || draggedX-droppedX== -1) && i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi) ){
+                                System.out.println(" passe2.5 ");
+                                cible.getChildren().clear();
+                                return true; 
+                                
+                            }else return false;
+                            
+                        }else{
+                                //si ce n'est pas un pion mais il y a une piece ennemi
+                                
+                                
+                                
+                                //test deplacement valide 
+                                System.out.println(" passe3 ");
+                                if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi)){
+                                    System.out.println(i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi));
+                                                return false;
+                                }
+                            }
+                            cible_roi(j,cible,couleur);
+                            
+                            
+                            
+                        }         
+                    
+                     
+                    
+                    if(j.gettype().equals(couleur)){
+                        if((j.getnom().equals("Tour") && i.getnom().equals("Roi")) || (i.getnom().equals("Tour") && j.getnom().equals("Roi")) ){
+                            if(rock == true)
+                        {    
+
+                                                        rock = false;
+
+                                                    }else{
+                                                        return false;
+                                                    }
+                        }else return false;
+                    }
+                }else{
+                    //test deplacement valide
+                    if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi)){
+                               // System.out.println(" pas normal " +i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi));
+                                            deplacement_ok = false;
+                            }
                 }
+            }
+            System.out.println(deplacement_ok + " " + ennemi);
+            return deplacement_ok;
+        }        
+                
+        public void handle(DragEvent event) {
+                Pane draggedApp = (Pane) event.getGestureSource();
+                Pane cible = (Pane) event.getGestureTarget();
+                boolean deplacement_ok = true;
+                boolean ennemi = false;
+                // switch panes:
+                int draggedX = GridPane.getColumnIndex(draggedApp);
+                int draggedY = GridPane.getRowIndex(draggedApp);
+                int droppedX = GridPane.getColumnIndex(app);
+                int droppedY = GridPane.getRowIndex(app);
+                String XD = nb_to_char(draggedX);
+                String XF = nb_to_char(droppedX);
+                
+                
                 //draggedApp.set
                
                 for(Piece i:Piece){
@@ -444,53 +519,8 @@ public class Control_Interface implements Initializable {
                               // tour blanc
                               if( tour_blanc == true)
                               {
-                                    System.out.println(" move blanc " );
-                                    for(Piece j:Piece){
-                                        
-                                        if(cible.getChildren().toString().equals(j.getid())){
-                                           
-                                        if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi))
-                                            deplacement_ok = false;
                                     
-                                            if(j.gettype().equals("noire") &&  deplacement_ok == true){
-                                            if(j.getnom().equals("Pion") && draggedX-droppedX==0 ){
-                                               deplacement_ok = false; 
-                                            }
-                                            else{
-                                            if(j.getnom().equals("Roi")){
-                                                cible.getChildren().clear();                                                
-                                                Alert alert = new Alert(AlertType.CONFIRMATION);
-                                                alert.setTitle("Echec et Mate");
-                                                alert.setHeaderText("Les noires on gagné !!!");
-                                                alert.setContentText("Voulez vous recommencer une partie ou quiiter le jeu?");
-
-                                                Optional<ButtonType> result = alert.showAndWait();
-                                                if (result.get() == ButtonType.OK){
-                                                    restart();
-                                                } else {
-                                                    Platform.exit();
-                                                }
-                                               
-                                                }
-                                            cible.getChildren().clear();
-                                            ennemi = true;
-                                            }
-                                            
-                                        } 
-                                            if(j.gettype().equals("blanc")){
-                                                if((j.getnom().equals("Tour") && i.getnom().equals("Roi")) || (i.getnom().equals("Tour") && j.getnom().equals("Roi")) ){
-                                                    if(rock_b_possible == true)
-                                                    {    
-
-                                                        rock_b_possible = false;
-
-                                                    }else{
-                                                        deplacement_ok = false;
-                                                    }
-                                                 }else deplacement_ok = false;
-                                                 }
-                                        }
-                                    }
+                                    deplacement_ok = test_move_valide("noire","blanc",cible,i,draggedX,draggedY, droppedX, droppedY,rock_b_possible);
                                        
                                     
                                      if(deplacement_ok == true){
@@ -511,60 +541,18 @@ public class Control_Interface implements Initializable {
                               if( tour_blanc == false)
                                 {
                                   
-                                  for(Piece j:Piece){
-                                    if(cible.getChildren().toString().equals(j.getid())){
-                                        if(!i.deplacementValide(draggedX,draggedY, droppedX, droppedY, ennemi))
-                                        deplacement_ok = false;
-                                        if(j.gettype().equals("blanc") && deplacement_ok == true ){
-                                            if(j.getnom().equals("Pion") && draggedX-droppedX==0 ){
-                                               deplacement_ok = false; 
-                                            }
-                                            else{
-                                            if(j.getnom().equals("Roi")){
-                                                cible.getChildren().clear();                                                
-                                                Alert alert = new Alert(AlertType.CONFIRMATION);
-                                                alert.setTitle("Echec et Mate");
-                                                alert.setHeaderText("Les blancs on gagné !!!");
-                                                alert.setContentText("Voulez vous recommencer une partie ou quiiter le jeu?");
-
-                                                Optional<ButtonType> result = alert.showAndWait();
-                                                if (result.get() == ButtonType.OK){
-                                                    restart();
-                                                } else {
-                                                    Platform.exit();
-                                                }
-                                               
-                                                }
-                                            cible.getChildren().clear();
-                                            ennemi = true;
-                                            }
-                                            
-                                        }
-                                        if(j.gettype().equals("noire")){
-                                            if(j.getnom().equals("Tour") && i.getnom().equals("Roi") || i.getnom().equals("Tour") && j.getnom().equals("Roi") ){
-                                                if(rock_n_possible == true)
-                                                {
-                                                    
-                                                    rock_n_possible = false;
-                                                   
-                                                }else{
-                                                    deplacement_ok = false;
-                                                }
-                                             }else deplacement_ok = false;
-                                        }
-                                    }
-                                  }
+                                    deplacement_ok = test_move_valide("blanc","noire",cible,i,draggedX,draggedY, droppedX, droppedY,rock_n_possible);
                                    
                                     
                                      
-                                  if(deplacement_ok == true){
+                                    if(deplacement_ok == true){
                                         String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
                                         oln.add(phrase);
                                         GridPane.setColumnIndex(draggedApp, droppedX);
                                         GridPane.setRowIndex(draggedApp, droppedY);
                                         GridPane.setColumnIndex(app, draggedX);
                                         GridPane.setRowIndex(app, draggedY);
-                                         Tour.setText("Tour des blancs !");
+                                        Tour.setText("Tour des blancs !");
                                         tour_blanc=true;
                                         ChronoB.stop();
                                         ChronoW.play();
@@ -622,7 +610,7 @@ public class Control_Interface implements Initializable {
         private void vide_grille(){
             grille.getChildren().clear();
         }
-           private void restart(){
+        private void restart(){
             tour_blanc = true;
             ChronoW.stop();
             ChronoW.reset();
