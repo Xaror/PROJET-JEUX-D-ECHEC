@@ -45,7 +45,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import JeuxEchecs.Echiquier;
 import static java.lang.Thread.sleep;
 import javafx.scene.Node;
 import static jdk.nashorn.internal.runtime.Context.DEBUG;
@@ -685,10 +684,6 @@ public class Control_Interface implements Initializable {
         public void initialize(URL url, ResourceBundle rb) {
                 // TODO
                 Piece = new ArrayList<Piece>();
-                
-                Echiquier E = new Echiquier();
-                
-                
                 listCpB.setItems(oln);
                 listCpW.setItems(olb);
                 
