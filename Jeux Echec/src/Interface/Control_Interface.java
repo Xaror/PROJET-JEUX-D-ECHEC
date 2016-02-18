@@ -46,6 +46,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import JeuxEchecs.Echiquier;
+import static java.lang.Thread.sleep;
+import javafx.scene.Node;
 import static jdk.nashorn.internal.runtime.Context.DEBUG;
 import ucichess.UCIChess;
 import ucichess.ChessBoard;
@@ -86,11 +88,19 @@ public class Control_Interface implements Initializable {
     private boolean rock_b_possible = true;
     private boolean rock_n_possible = true;
     
-    UCIChess uci = new UCIChess("./src/stockfish-6-win/Windows/stockfish-6-64.exe");
+    //UCIChess uci = new UCIChess("./src/stockfish-6-win/Windows/stockfish-6-64.exe");
 
     
     String FEN=ChessBoard.STARTPOSITION;
     ArrayList<ChessBoard.Position> ar;
+    
+    
+    String moves=null; //keep moves in a String
+
+    final boolean traceMode=false;
+    final long timeThinking=100; //time thinking in miliseconds
+    String fenPos="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+    
     
     
        //charger tour 
@@ -313,6 +323,8 @@ public class Control_Interface implements Initializable {
                  app.getChildren().add(PB8.getimg());
                  PB8.setid(app.getChildren().toString());
                  Piece.add(PB8);
+                 
+                  
         }
        
         
@@ -496,7 +508,12 @@ public class Control_Interface implements Initializable {
             System.out.println(deplacement_ok + " " + ennemi);
             return deplacement_ok;
         }        
-                
+        public void move(Pane draggedApp, int XD,int YD,int XF, int YF){
+            GridPane.setColumnIndex(draggedApp, XF);
+            GridPane.setRowIndex(draggedApp, YF);
+            GridPane.setColumnIndex(app, XD);
+            GridPane.setRowIndex(app, YD);
+        }       
         public void handle(DragEvent event) {
                 Pane draggedApp = (Pane) event.getGestureSource();
                 Pane cible = (Pane) event.getGestureTarget();
@@ -528,10 +545,7 @@ public class Control_Interface implements Initializable {
                                      if(deplacement_ok == true){
                                             String phrase =  i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
                                             olb.add(phrase);
-                                            GridPane.setColumnIndex(draggedApp, droppedX);
-                                            GridPane.setRowIndex(draggedApp, droppedY);
-                                            GridPane.setColumnIndex(app, draggedX);
-                                            GridPane.setRowIndex(app, draggedY);
+                                            move(draggedApp,draggedX,draggedY,droppedX,droppedY);
                                             tour_blanc=false;
                                             Tour.setText("Tour des noirs !");
                                             ChronoW.stop();
@@ -550,10 +564,7 @@ public class Control_Interface implements Initializable {
                                     if(deplacement_ok == true){
                                         String phrase = i.getnom() + " " + XD + " " + draggedY + " - " + XF + " " + droppedY ;
                                         oln.add(phrase);
-                                        GridPane.setColumnIndex(draggedApp, droppedX);
-                                        GridPane.setRowIndex(draggedApp, droppedY);
-                                        GridPane.setColumnIndex(app, draggedX);
-                                        GridPane.setRowIndex(app, draggedY);
+                                        move(draggedApp,draggedX,draggedY,droppedX,droppedY);
                                         Tour.setText("Tour des blancs !");
                                         tour_blanc=true;
                                         ChronoB.stop();
@@ -580,7 +591,7 @@ public class Control_Interface implements Initializable {
 
 
         @FXML
-        private void btnStartClick(ActionEvent event) {
+        private void btnStartClick(ActionEvent event) throws InterruptedException {
             tour_blanc = true;
             charge_pieces();
             Tour.setText("Tour des blancs !");
@@ -591,7 +602,14 @@ public class Control_Interface implements Initializable {
             ChronoB.setLbl(tmpB);
             ChronoW.play();
             StartGame.setDisable(true);
-            }
+            /*sleep(1000);
+                party();
+            }*/
+            
+            make_move("a1c5","noire");
+            make_move("e1e4","noire");
+            make_move("e8d4","noire");
+        }
         @FXML
         private void btnAbandonClick(ActionEvent event) {
             tour_blanc = true;
@@ -641,13 +659,196 @@ public class Control_Interface implements Initializable {
                 listCpW.setItems(olb);
                 
                  //charger le moteur si possible
-               
+               //make_move("a1b2","");
                 
-                test();
+                //test();
             }     
   
+        /*public void Playing_game(String move){
+            String whiteMove=move;
+            String startPos="";
+            uci.move_FromFEN(startPos, whiteMove, true);
+            String fenWhite=ChessBoard.moveFromFEN(startPos, whiteMove);
+            ChessBoard.show_chessboard();
+            
+            //black response
+            uci.go_Think();
+            String blackMove=uci.get_BestMove(true);
+             System.out.println("black move "+blackMove);
+             uci.move_FromFEN(fenWhite, blackMove, true);
+             String fenBlack=ChessBoard.moveFromFEN(fenWhite, blackMove);
+             ChessBoard.show_chessboard();
+        }*/
+        public void party() throws InterruptedException{
+            
+        long i=1000;    
+        UCIChess engine1=new UCIChess("./src/Protector_1_6_0/bin/Protector 1.6.0 x64.exe");
+        //run engine2
+        UCIChess engine2=new UCIChess("./src/stockfish-6-win/Windows/stockfish-6-64.exe");
+       //get name of first one
+        engine1.get_UciOk(false);
+        String nameEngine1=engine1.getEngineName();
+        //get name of second's
+        engine2.get_UciOk(false);
+        String nameEngine2=engine2.getEngineName();
    
-        public void test()
+        System.out.println(nameEngine1+" is white player.");
+        System.out.println(nameEngine2+" is black player.\n");    
+        int turn=1;    
+        while (turn<=500){
+        sleep(i);
+        //wait engine1
+        engine1.get_ReadyOk(traceMode);
+       
+            //play white for engine1
+            //engine1.go_Think(); //think for best move x seconds
+            System.out.println("Wait white thinking...!");
+            engine1.go_Think_MoveTime(timeThinking);//think for best move x seconds
+            String repw=engine1.get_BestMove(traceMode);  //read response
+            if (moves==null){moves=repw;} //just the first move
+            else {moves=moves+" "+repw;} //incruise moves list
+            System.out.println("\n"+nameEngine1+"=> White play (turn "+turn+") "+repw+"\n");
+            fenPos=ChessBoard.moveFromFEN(fenPos, repw);
+            ChessBoard.show_wide_chessboard();
+            //if black is mate then white say "score mate 1" so test it
+            if (engine1.is_opponent_Mated(traceMode)){System.out.println("\nturn("+turn+")"+nameEngine1+" playing WHITE WIN\n");moves=moves+" black is mate";break;}
+            //apply moves to all engines
+            engine1.move_FromSTART(moves,traceMode); //make move
+            engine2.move_FromSTART(moves,traceMode); //make move
+            make_move(repw,"blanc");
+            sleep(i);
+            //wait for engine2
+            engine2.get_ReadyOk(traceMode);
+       
+            //play black for engine2
+            //engine2.go_Think(); //think for best move
+            System.out.println("Wait black thinking...!");
+            engine2.go_Think_MoveTime(timeThinking);//think for best move
+            String repb=engine2.get_BestMove(traceMode);  //read response
+            moves=moves+" "+repb; //incruise moves list
+            System.out.println("\n"+nameEngine2+"=> Black play (turn "+turn+") "+repb+"\n");
+            fenPos=ChessBoard.moveFromFEN(fenPos, repb);
+            ChessBoard.show_chessboard();
+            System.out.println("moves : "+moves+"\n");
+            //if white is mate then black say "score mate 1" so test it
+            if (engine2.is_opponent_Mated(traceMode)) {System.out.println("\nturn("+turn+")"+nameEngine2+" playing BLACK WIN\n");moves=moves+" white is mate";break;}
+            
+            //apply moves to all engines
+            engine1.move_FromSTART(moves,traceMode); //make move
+            engine2.move_FromSTART(moves,traceMode); //make move
+            make_move(repb,"noire");
+        
+   turn++;
+   }
+        }
+        public int char_to_nb(String a){
+           int i = 0;
+            switch (a)
+                {
+
+                  case "a":
+                    i=0;
+                    break;  
+                  case "b":
+                    i=1;
+                    break; 
+                  case "c":
+                    i=2;
+                    break; 
+                  case "d":
+                    i=3;
+                    break; 
+                  case "e":
+                    i=4;
+                    break; 
+                  case "f":
+                    i=5;
+                    break;
+                  case "g":
+                    i=6;
+                    break;
+                  case "h":
+                    i=7;
+                    break;
+                }
+            return i;
+        }
+        public int inverse_coor(String a){
+           int i = 0;
+            switch (a)
+                {
+
+                  case "1":
+                    i=7;
+                    break;  
+                  case "2":
+                    i=6;
+                    break; 
+                  case "3":
+                    i=5;
+                    break; 
+                  case "4":
+                    i=4;
+                    break; 
+                  case "5":
+                    i=3;
+                    break; 
+                  case "6":
+                    i=2;
+                    break;
+                  case "7":
+                    i=1;
+                    break;
+                  case "8":
+                    i=0;
+                    break;
+                }
+            return i;
+        }
+        public void make_move(String move,String couleur){
+        final Pane app = new StackPane();
+        System.out.println(move );
+        
+        String[] tokens = new String[6];
+        for(int i = 0; i < move.length();i++)
+            {
+            tokens[i]=(move.substring(i, i+1));
+   
+            }
+        
+        int XD = char_to_nb(tokens[0]);
+        int YD = inverse_coor(tokens[1]);
+        int XF = char_to_nb(tokens[2]);
+        int YF = inverse_coor(tokens[3]);
+        
+       Node a = getNodeByRowColumnIndex(XD,YD); 
+       //System.out.println(a);
+       System.out.println(move + " " + XD + YD  + XF + YF);
+      
+      
+       move2(a,XF,YF,XD,YD);
+    }
+   
+    public void move2(Node draggedApp, int XD,int YD,int XF, int YF){
+            final Pane app = new StackPane();
+            
+            grille.setColumnIndex(draggedApp, XF);
+            grille.setRowIndex(draggedApp, YF);
+            grille.setColumnIndex(app, XD);
+            grille.setRowIndex(app, YD);
+        }
+    public Node getNodeByRowColumnIndex(final int row,final int column) {
+        Node result = null;
+        ObservableList<Node> childrens = grille.getChildren();
+        for(Node node : childrens) {
+            if(grille.getRowIndex(node) == row && grille.getColumnIndex(node) == column) {
+                result = node;
+                break;
+            }
+        }
+        return result;
+    }
+        /*public void test()
         {
               //ask uci infos
             System.out.println("======================TEST UCI COMMAND======================");
@@ -723,28 +924,17 @@ public class Control_Interface implements Initializable {
 
             System.out.println("-------------------TEST SQUARE--------------------------");
             
-            //white play
-            String whiteMove="e2e4";
-            String startPos="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-            uci.move_FromFEN(startPos, whiteMove, true);
-            String fenWhite=ChessBoard.moveFromFEN(startPos, whiteMove);
-            ChessBoard.show_chessboard();
+            String FEN="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+            ChessBoard.assign_chessboard(FEN);
             
-            //black response
-            uci.go_Think();
-            String blackMove=uci.get_BestMove(true);
-             System.out.println("black move "+blackMove);
-             uci.move_FromFEN(fenWhite, blackMove, true);
-             String fenBlack=ChessBoard.moveFromFEN(fenWhite, blackMove);
-             ChessBoard.show_chessboard();
              
 
 
              
             //bye bye...
-            System.out.println("Bye Bye!");
+            
             uci.stop_Engine();
-        }
+        }*/
     
 
 
