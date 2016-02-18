@@ -391,7 +391,7 @@ public class Control_Interface implements Initializable {
                                 Alert alert = new Alert(AlertType.CONFIRMATION);
                                 alert.setTitle("Echec et Mate");
                                 alert.setHeaderText("Les "+ couleur +"s on gagné !!!");
-                                alert.setContentText("Voulez vous recommencer une partie ou quiiter le jeu?");
+                                alert.setContentText("Voulez vous recommencer une partie ou quitter le jeu?");
                                 Optional<ButtonType> result = alert.showAndWait();
                                 if (result.get() == ButtonType.OK){
                                     
@@ -445,7 +445,7 @@ public class Control_Interface implements Initializable {
                                                 return false;
                                 }
                             }
-                            cible_roi(j,cible,couleur);
+                            deplacement_ok=cible_roi(j,cible,couleur);
                             
                             
                             
