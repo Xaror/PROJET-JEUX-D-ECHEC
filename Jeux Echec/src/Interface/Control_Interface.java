@@ -445,7 +445,7 @@ public class Control_Interface implements Initializable {
                                                 return false;
                                 }
                             }
-                            deplacement_ok=cible_roi(j,cible,couleur);
+                            cible_roi(j,cible,couleur);
                             
                             
                             
