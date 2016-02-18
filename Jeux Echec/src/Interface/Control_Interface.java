@@ -5,6 +5,8 @@
  */
 package Interface;
 
+import JeuxEchecs.Chronometre;
+import JeuxEchecs.Piece;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
