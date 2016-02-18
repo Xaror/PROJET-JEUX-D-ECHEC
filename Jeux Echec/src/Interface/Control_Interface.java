@@ -85,10 +85,12 @@ public class Control_Interface implements Initializable {
     private Chronometre ChronoB;
     private boolean rock_b_possible = true;
     private boolean rock_n_possible = true;
-    UCIChess uci;
+    
+    UCIChess uci = new UCIChess("./src/stockfish-6-win/Windows/stockfish-6-64.exe");
 
     
-    
+    String FEN=ChessBoard.STARTPOSITION;
+    ArrayList<ChessBoard.Position> ar;
     
     
        //charger tour 
@@ -640,72 +642,113 @@ public class Control_Interface implements Initializable {
                 
                  //charger le moteur si possible
                
-                String engine=read_Engine();
-                //si aucun moteur alors seule solution le charger
-                if (!isEngineUP){
-                    StartGame.setDisable(true);
-                    Abandon.setDisable(true);
-                }
-                else
-                {
-                     startEngine(engine);
-                }
+                
+                test();
             }     
   
    
+        public void test()
+        {
+              //ask uci infos
+            System.out.println("======================TEST UCI COMMAND======================");
+           //is uci ok ?
+            System.out.println("uciok = "+uci.get_UciOk(false));
+            //engine name and author(s)
+            System.out.println("Engine Name = "+uci.getEngineName());
+            System.out.println("Engine Author(s) = "+uci.get_EngineAuthor());
+            System.out.println("==================TEST UCI OPTIONS RETRIEVE=================");
+            //number of options in uci engine
+            System.out.println("Numbers of options = "+uci.get_Number_Options());
+            //list all uci options (names, type, values)
+            System.out.format("%-30s %-10s %-20s\n","Name(id)","type","values");
+            System.out.println("------------------------------------------------------------");
+            for (int i=0;i<uci.get_Number_Options();i++)
+            {
+                System.out.format("%-30s %-10s %-20s\n",uci.get_Option(i).getId(),uci.get_Option(i).getType(),uci.get_Option(i).getValues() );
+            }
+            System.out.println("=====================PLAY A SMALL GAME=====================");
+            //is engine ready?
+            System.out.println("isready = "+uci.get_ReadyOk(false));
+            
+            //white play e2e4
+            System.out.println("White play = e2e4");
+            uci.move_FromSTART("e2e4 ",false); 
+            System.out.println("-------------------------------------------------------");
+            //is engine ready for next move?
+            System.out.println("isready = "+uci.get_ReadyOk(false));
+            
+            //black move (engine play)
+            uci.go_Think(); //think for best move
+            String rep=uci.get_BestMove(false);  //read response
+            System.out.println("---------------info on best move-----------------------");
+            System.out.println("Number of infos lines = "+uci.get_Number_SimpleInfo());
+            System.out.format("%-50s\n","Info lines");
+            System.out.println("-------------------------------------------------------");
+            for (int i=0;i<uci.get_Number_SimpleInfo();i++)
+            {
+                System.out.format("%-50s\n",uci.get_SimpleInfo(i).getInfo());
+            }
+            System.out.println("-------------------------------------------------------");
+            System.out.println("Black play = "+rep); //draw best move
+            System.out.println("Black ponder = "+uci.get_Ponder()); //best white next move
+            uci.move_FromSTART("e2e4 "+rep,false); //make move
+            System.out.println("-------------------------------------------------------");
+            
+            //is engine ready for next move?
+            System.out.println("isready = "+uci.get_ReadyOk(false));
+            
+            //white play g1f3
+            System.out.println("White play = g1f3");
+            uci.move_FromSTART("e2e4 "+rep+" g1f3 ",false);
+            System.out.println("-------------------------------------------------------");
+            //is engine ready for next move?
+            System.out.println("isready = "+uci.get_ReadyOk(false));
+            
+            //black play
+            System.out.println("Black thinking 5 seconds wait please....");
+            uci.go_Think_MoveTime(5000); //search next move during 5 seconds
+            String rep2=uci.get_BestMove(true);  //read best move
+            System.out.println("---------------info on best move-----------------------");
+            System.out.println("Number of infos lines = "+uci.get_Number_DetailedInfo());
+            System.out.format("%-50s\n","Info Details");
+            System.out.println("-------------------------------------------------------");
+            for (int i=0;i<uci.get_Number_DetailedInfo();i++)
+            {
+                System.out.format("Step "+i+" Calculate Nodes = %-50s\n",uci.get_DetailedInfo(i).getNodes());
+            }
+            System.out.println("-------------------------------------------------------");
+            System.out.println("Black play = "+rep2); //draw black turn
+            System.out.println("Black ponder = "+uci.get_Ponder()); //best white next move
+            uci.move_FromSTART("e2e4 "+rep+" g1f3 "+rep2,false); //make move
 
-    /**
-     * Lire le nom du moteur d'echec
-     * @return
-     */
-    private String read_Engine(){
-        Properties p=new Properties(); //ouvrir le fichier propriété
-        try {
-            p.loadFromXML(new FileInputStream("engine.xml"));
-        } catch (FileNotFoundException ex) {
-            //si fichier indisponible
-           isEngineUP=false;
-           return null;
-        } catch (IOException ex) {
-            //si fichier indisponible
-           isEngineUP=false;
-           return null;
+            System.out.println("-------------------TEST SQUARE--------------------------");
+            
+            //white play
+            String whiteMove="e2e4";
+            String startPos="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+            uci.move_FromFEN(startPos, whiteMove, true);
+            String fenWhite=ChessBoard.moveFromFEN(startPos, whiteMove);
+            ChessBoard.show_chessboard();
+            
+            //black response
+            uci.go_Think();
+            String blackMove=uci.get_BestMove(true);
+             System.out.println("black move "+blackMove);
+             uci.move_FromFEN(fenWhite, blackMove, true);
+             String fenBlack=ChessBoard.moveFromFEN(fenWhite, blackMove);
+             ChessBoard.show_chessboard();
+             
+
+
+             
+            //bye bye...
+            System.out.println("Bye Bye!");
+            uci.stop_Engine();
         }
-        isEngineUP=true;
-        return p.getProperty("ENGINE");
-    }
+    
 
 
-    /**
-     * Sauvegarder moteur d'échec
-     * @param path
-     */
-    private void save_Engine(String path){
-        Properties p=new Properties(); //creer un properties
-        p.setProperty("ENGINE", path); //affecter le chemin du moteur a la propriété ENGINE
-        try {
-            p.storeToXML(new FileOutputStream("engine.xml"), "HT ENGINE"); //sauvegarder
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Control_Interface.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Control_Interface.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-
-    /**
-     * lance le moteur d'échec...
-     * @param path
-     */
-    /****/
-    private void startEngine(String path){
-        uci=new UCIChess(path);
-        uci.get_UciOk(DEBUG);
-        //btnMoteur.setText("Moteur : "+uci.getEngineName());
-        //init_board();
-        //affiche_Board();
-        uci.send_uciNewGame();
-    }
+    
 
 
    
