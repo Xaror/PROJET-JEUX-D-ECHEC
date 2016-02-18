@@ -648,11 +648,14 @@ public class Control_Interface implements Initializable {
         @FXML
         private void btnAbandonClick(ActionEvent event) {
             tour_blanc = true;
+            rock_b_possible = true;
+            rock_n_possible = true;
             ChronoW.stop();
             ChronoW.reset();
             ChronoB.stop();
             ChronoB.reset();
             vide_grille();
+            Piece.clear();
             listCpW.getItems().clear();
             listCpB.getItems().clear();
             tmpW.setText("00:00:000");
@@ -667,11 +670,14 @@ public class Control_Interface implements Initializable {
         }
         private void restart(){
             tour_blanc = true;
+            rock_b_possible = true;
+            rock_n_possible = true;
             ChronoW.stop();
             ChronoW.reset();
             ChronoB.stop();
             ChronoB.reset();
             vide_grille();
+            Piece.clear();
             listCpW.getItems().clear();
             listCpB.getItems().clear();
             tmpW.setText("00:00:000");
