@@ -13,7 +13,14 @@
       <Button fx:id="closeButton" layoutX="1011.0" layoutY="603.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="64.0" prefWidth="155.0" text="Fermer">
          <font>
             <Font name="Comic Sans MS Bold Italic" size="18.0" />
-         </font></Button>
+         </font>
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@font/quitter.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
       <ImageView fx:id="plateau" fitHeight="521.0" fitWidth="501.0" layoutX="100.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@font/echiquier.jpg" />
@@ -49,10 +56,17 @@
          </effect>            
                 
       </Button>
-      <Button fx:id="Abandon" layoutX="957.0" layoutY="65.0" mnemonicParsing="false" onAction="#btnAbandonClick" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: red;" text="Abandonner" textFill="WHITE">
+      <Button fx:id="Abandon" layoutX="1031.0" layoutY="115.0" mnemonicParsing="false" onAction="#btnAbandonClick" prefHeight="50.0" prefWidth="175.0" style="-fx-background-color: red;" text="Abandonner" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold Italic" size="18.0" />
-         </font></Button>
+         </font>
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="@font/game_over.png" />
+               </source>
+            </ImageInput>
+         </effect></Button>
       <ListView fx:id="listCpB" layoutX="947.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
       <ListView fx:id="listCpW" layoutX="727.0" layoutY="289.0" prefHeight="293.0" prefWidth="219.0" />
       <GridPane fx:id="grille" alignment="BOTTOM_CENTER" layoutX="129.0" layoutY="191.0" prefHeight="444.0" prefWidth="444.0">
