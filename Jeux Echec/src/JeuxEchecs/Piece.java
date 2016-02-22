@@ -27,6 +27,11 @@ public class Piece {
         this.img= img;
         this.type=type;
     }
+    public Piece ( ){
+        this.nom= "";
+        this.img= null;
+        this.type="";
+    }
     public String getnom(){
         return nom;
     }

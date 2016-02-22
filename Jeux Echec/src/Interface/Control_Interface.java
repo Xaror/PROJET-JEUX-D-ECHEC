@@ -101,59 +101,97 @@ public class Control_Interface implements Initializable {
     final boolean traceMode=false;
     final long timeThinking=100; //time thinking in miliseconds
     String fenPos="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
-    
-    
-    
-       //charger tour 
-            Piece TB1 = new Piece("Tour",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TB.gif")))),"blanc");     
-            Piece TN1 = new Piece("Tour",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TN.gif")))),"noire");
-            Piece TB2 = new Piece("Tour",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TB.gif")))),"blanc");
-            Piece TN2 = new Piece("Tour",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TN.gif")))),"noire");
+            Piece TB1 = new Piece();     
+            Piece TN1 = new Piece();
+            Piece TB2 = new Piece();
+            Piece TN2 = new Piece();
         
         //charger cav     
-            Piece CB1 = new Piece("Cavalier",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CB.gif")))),"blanc");
-            Piece CN1 = new Piece("Cavalier",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CN.gif")))),"noire");
-            Piece CB2 = new Piece("Cavalier",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CB.gif")))),"blanc");
-            Piece CN2 = new Piece("Cavalier",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CN.gif")))),"noire");
+            Piece CB1 = new Piece();
+            Piece CN1 = new Piece();
+            Piece CB2 = new Piece();
+            Piece CN2 = new Piece();
             
         //charger fou   
-            Piece FB1 = new Piece("Fou",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FB.gif")))),"blanc");
-            Piece FN1 = new Piece("Fou",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FN.gif")))),"noire");
-            Piece FB2 = new Piece("Fou",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FB.gif")))),"blanc");
-            Piece FN2 = new Piece("Fou",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FN.gif")))),"noire");
+            Piece FB1 = new Piece();
+            Piece FN1 = new Piece();
+            Piece FB2 = new Piece();
+            Piece FN2 = new Piece();
             
          //charger dame     
-            Piece DB = new Piece("Reine",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/DB.gif")))),"blanc");
-            Piece DN = new Piece("Reine",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/DN.gif")))),"noire");
+            Piece DB = new Piece();
+            Piece DN = new Piece();
             
         //charger roi    
-            Piece RB = new Piece("Roi",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/RB.gif")))),"blanc");
-            Piece RN = new Piece("Roi",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/RN.gif")))),"noire");
+            Piece RB = new Piece();
+            Piece RN = new Piece();
            
           
         //charger pion     
-            Piece PB1 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
-            Piece PN1 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
-            Piece PB2 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
-            Piece PN2 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
-            Piece PB3 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
-            Piece PN3 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
-            Piece PB4 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
-            Piece PN4 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
-            Piece PB5 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
-            Piece PN5 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
-            Piece PB6 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
-            Piece PN6 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
-            Piece PB7 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
-            Piece PN7 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
-            Piece PB8 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
-            Piece PN8 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+            Piece PB1 = new Piece();
+            Piece PN1 = new Piece();
+            Piece PB2 = new Piece();
+            Piece PN2 = new Piece();
+            Piece PB3 = new Piece();
+            Piece PN3 = new Piece();
+            Piece PB4 = new Piece();
+            Piece PN4 = new Piece();
+            Piece PB5 = new Piece();
+            Piece PN5 = new Piece();
+            Piece PB6 = new Piece();
+            Piece PN6 = new Piece();
+            Piece PB7 = new Piece();
+            Piece PN7 = new Piece();
+            Piece PB8 = new Piece();
+            Piece PN8 = new Piece();
             
-           
         
-            
+     private void charge_pieces(){ 
+        try{
+        TB1 = new Piece("Tour",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TB.gif")))),"blanc");
+        TN1 = new Piece("Tour",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TN.gif")))),"noire");
+        TB2 = new Piece("Tour",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TB.gif")))),"blanc");
+        TN2 = new Piece("Tour",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/TN.gif")))),"noire");
+        CB1 = new Piece("Cavalier",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CB.gif")))),"blanc");
+        CN1 = new Piece("Cavalier",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CN.gif")))),"noire");
+        CB2 = new Piece("Cavalier",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CB.gif")))),"blanc");
+        CN2 = new Piece("Cavalier",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/CN.gif")))),"noire");
+        FB1 = new Piece("Fou",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FB.gif")))),"blanc");
+        FN1 = new Piece("Fou",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FN.gif")))),"noire");
+        FB2 = new Piece("Fou",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FB.gif")))),"blanc");
+        FN2 = new Piece("Fou",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/FN.gif")))),"noire");
+        DB = new Piece("Reine",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/DB.gif")))),"blanc");
+        DN = new Piece("Reine",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/DN.gif")))),"noire");
+        RB = new Piece("Roi",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/RB.gif")))),"blanc");
+        RN = new Piece("Roi",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/RN.gif")))),"noire");
+        PB1 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+        PN1 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+        PB2 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+        PN2 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+        PB3 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+        PN3 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+        PB4 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+        PN4 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+        PB5 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+        PN5 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+        PB6 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+        PN6 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+        PB7 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+        PN7 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+        PB8 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PB.gif")))),"blanc");
+        PN8 = new Piece("Pion",( new ImageView(new Image(Control_Interface.class.getResourceAsStream("font/PN.gif")))),"noire");
+    }catch (NullPointerException ex) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Erreur au chargement des pièces");
+            alert.setHeaderText("Alerte!!!");
+            alert.setContentText("Fichier image d'une pièce manquant, l'application va se fermer!");
+            alert.showAndWait();
+            Platform.exit();
+        }
+        
+       
     
-        private void charge_pieces(){           
+                 
             //+grille.setGridLinesVisible(true);
             final int appsPerRow = 8;
             
@@ -694,7 +732,7 @@ public class Control_Interface implements Initializable {
                 Piece = new ArrayList<Piece>();
                 listCpB.setItems(oln);
                 listCpW.setItems(olb);
-                
+                //charge_image();
                  //charger le moteur si possible
                //make_move("a1b2","");
                 
